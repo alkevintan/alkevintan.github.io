@@ -1,12 +1,82 @@
 <% set_meta title: "Mobile App Development Philippines",
-     description: "iOS and Android mobile app development in the Philippines. Native and cross-platform apps built by AktiveSolutions in Bicol, serving nationwide." %>
+     description: "iOS and Android mobile app development in the Philippines. Native and cross-platform apps built by AktiveSolutions in Bicol, serving clients nationwide. Get a free quote." %>
 
 <%= render "shared/page_header", eyebrow: "Services",
       title: "Mobile App Development",
-      subtitle: "Native and cross-platform iOS & Android apps, from idea to App Store." %>
+      subtitle: "Native and cross-platform iOS & Android apps — from idea to the App Store and Google Play." %>
 
-<section class="site-container py-16 prose-content">
-  <p>Full page content is coming soon. In the meantime, <%= link_to "get a free quote", contact_path %>.</p>
+<section class="site-container py-16">
+  <div class="prose-content max-w-3xl">
+    <p>Your customers live on their phones. A well-built mobile app puts your business in
+       their pocket — with fast performance, offline access, and push notifications that
+       bring them back.</p>
+    <p>We take your idea from concept to launch, building reliable apps that people actually
+       enjoy using, backed by a solid, scalable server.</p>
+  </div>
+
+  <div class="mt-14">
+    <h2 class="text-2xl">What we build</h2>
+    <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <% [
+        ["Cross-platform apps", "One codebase for both iOS and Android — faster to build and easier to maintain."],
+        ["Native apps", "Platform-specific apps when you need maximum performance and device features."],
+        ["Booking & ordering apps", "Let customers book, order and pay from their phone, 24/7."],
+        ["Business & internal apps", "Tools for your team — inventory, field work, reporting and more."],
+        ["App backends & APIs", "Secure, scalable servers and APIs that power your app."],
+        ["App Store launch", "We handle builds, store listings and the submission process."]
+      ].each do |title, body| %>
+        <div class="card">
+          <h3 class="font-semibold text-slate-900"><%= title %></h3>
+          <p class="mt-2 text-sm text-slate-600"><%= body %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </section>
 
-<%= render "shared/cta" %>
+<section class="bg-slate-50 py-16">
+  <div class="site-container">
+    <h2 class="text-2xl">How we work</h2>
+    <ol class="mt-8 grid gap-8 md:grid-cols-4">
+      <% [
+        ["01", "Discover", "We define your app's core features and give you a clear, fixed-scope quote."],
+        ["02", "Design", "We design intuitive screens and flows your users will love."],
+        ["03", "Build & test", "We develop and rigorously test on real devices."],
+        ["04", "Launch & support", "We publish to the App Store and Google Play, then support your app."]
+      ].each do |num, title, body| %>
+        <li>
+          <span class="font-display text-2xl font-bold text-brand-500"><%= num %></span>
+          <h3 class="mt-2 font-semibold text-slate-900"><%= title %></h3>
+          <p class="mt-1 text-sm text-slate-600"><%= body %></p>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</section>
+
+<section class="site-container py-16">
+  <div class="max-w-3xl">
+    <h2 class="text-2xl">Technology we use</h2>
+    <p class="mt-3 text-slate-600">We choose the right tools for your app's needs and budget.</p>
+    <div class="mt-6 flex flex-wrap gap-2">
+      <% ["React Native", "Swift (iOS)", "Kotlin (Android)", "Ruby on Rails API", "PostgreSQL", "Firebase", "Push notifications"].each do |t| %>
+        <span class="rounded-full bg-slate-100 px-4 py-1.5 text-sm font-medium text-slate-700"><%= t %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%= render "shared/faq", faqs: [
+  ["Should I build a mobile app or a website first?",
+   "It depends on your goals. Many businesses start with a website and add an app once there's proven demand. <a href='/blog/mobile-app-vs-website-philippines'>Read our guide</a> to decide."],
+  ["Do you build for both iOS and Android?",
+   "Yes. We usually build cross-platform apps so you reach both iOS and Android users from a single codebase, which saves time and cost."],
+  ["How much does a mobile app cost in the Philippines?",
+   "App projects are quoted based on features and complexity. Tell us your idea and we'll give you a fixed-scope estimate for free."],
+  ["Will you help publish the app to the stores?",
+   "Yes. We handle the builds, store listings and submission to the Apple App Store and Google Play."],
+  ["Do you provide support after launch?",
+   "Yes. We offer maintenance and support so your app stays updated and reliable as your business grows."]
+] %>
+
+<%= render "shared/cta", title: "Have an app idea? Let's build it." %>

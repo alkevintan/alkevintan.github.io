@@ -1,12 +1,86 @@
 <% set_meta title: "Web Development Philippines",
-     description: "Custom web development in the Philippines — fast, SEO-ready websites and web apps. Serving Bicol (Naga, Legazpi) and nationwide." %>
+     description: "Custom web development in the Philippines — fast, SEO-ready websites and web apps. Serving Bicol (Naga, Legazpi) and businesses nationwide. Get a free quote." %>
 
 <%= render "shared/page_header", eyebrow: "Services",
       title: "Web Development",
-      subtitle: "Fast, secure, SEO-ready websites and web applications for Philippine businesses." %>
+      subtitle: "Fast, secure, SEO-ready websites and web applications for Philippine businesses — designed to turn visitors into customers." %>
 
-<section class="site-container py-16 prose-content">
-  <p>Full page content is coming soon. In the meantime, <%= link_to "get a free quote", contact_path %>.</p>
+<section class="site-container py-16">
+  <div class="prose-content max-w-3xl">
+    <p>Your website is often the first impression a customer has of your business. We build
+       websites and web applications that load fast, look great on every phone, and are
+       structured to rank on Google — so the right people find you and take action.</p>
+    <p>Whether you're a startup in Naga, an established business in Legazpi, or serving
+       customers across the Philippines, we design and develop the web presence your
+       business deserves.</p>
+  </div>
+
+  <%# What we build %>
+  <div class="mt-14">
+    <h2 class="text-2xl">What we build</h2>
+    <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <% [
+        ["Business & brochure sites", "Professional multi-page websites that build trust and generate inquiries."],
+        ["E-commerce stores", "Online shops with secure payments, inventory and nationwide shipping."],
+        ["Web applications", "Custom dashboards, booking systems and internal tools built around your workflow."],
+        ["Landing pages", "High-converting pages for campaigns and ads."],
+        ["Website redesigns", "Modernize a slow or dated site into a fast, mobile-first experience."],
+        ["SEO & performance", "Technical SEO, Core Web Vitals and speed tuning so you rank and convert."]
+      ].each do |title, body| %>
+        <div class="card">
+          <h3 class="font-semibold text-slate-900"><%= title %></h3>
+          <p class="mt-2 text-sm text-slate-600"><%= body %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </section>
 
-<%= render "shared/cta" %>
+<%# Process %>
+<section class="bg-slate-50 py-16">
+  <div class="site-container">
+    <h2 class="text-2xl">How we work</h2>
+    <ol class="mt-8 grid gap-8 md:grid-cols-4">
+      <% [
+        ["01", "Discover", "We learn your goals, audience and requirements, then give you a clear, fixed-scope quote."],
+        ["02", "Design", "We design a clean, on-brand, mobile-first experience for your approval."],
+        ["03", "Build", "We develop with modern, maintainable code — and keep you updated throughout."],
+        ["04", "Launch & grow", "We launch, set up analytics and SEO, and support you after go-live."]
+      ].each do |num, title, body| %>
+        <li>
+          <span class="font-display text-2xl font-bold text-brand-500"><%= num %></span>
+          <h3 class="mt-2 font-semibold text-slate-900"><%= title %></h3>
+          <p class="mt-1 text-sm text-slate-600"><%= body %></p>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</section>
+
+<%# Tech %>
+<section class="site-container py-16">
+  <div class="max-w-3xl">
+    <h2 class="text-2xl">Technology we use</h2>
+    <p class="mt-3 text-slate-600">We build on proven, modern tools chosen for speed, security and long-term maintainability.</p>
+    <div class="mt-6 flex flex-wrap gap-2">
+      <% ["Ruby on Rails", "Hotwire", "JavaScript", "Tailwind CSS", "PostgreSQL", "React", "Stripe", "AWS / Cloud"].each do |t| %>
+        <span class="rounded-full bg-slate-100 px-4 py-1.5 text-sm font-medium text-slate-700"><%= t %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%= render "shared/faq", faqs: [
+  ["How much does a website cost in the Philippines?",
+   "It depends on scope. Business websites typically range from ₱30,000–₱120,000, while e-commerce and custom web apps are quoted per project. <a href='/blog/website-cost-philippines-2026'>Read our full pricing guide</a> or <a href='/contact'>get a free quote</a>."],
+  ["How long does it take to build a website?",
+   "A typical business website takes 3–6 weeks from kickoff to launch, depending on the number of pages and features."],
+  ["Will my website show up on Google?",
+   "Yes. We build every site with technical SEO, fast load times and clean structure so it can rank — and we can help with ongoing SEO content too."],
+  ["Do you work with businesses outside Bicol?",
+   "Absolutely. We're based in Bicol but work with clients across the Philippines and communicate online throughout the project."],
+  ["Can you redesign my existing website?",
+   "Yes. We can modernize a slow or outdated site while preserving your content and search rankings."]
+] %>
+
+<%= render "shared/cta", title: "Ready to build your website?" %>
