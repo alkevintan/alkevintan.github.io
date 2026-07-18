@@ -96,7 +96,8 @@ production:
   primary: &primary_production
     <<: *default
     database: aktive_solutions_production
-    username: aktive_solutions
+    host: <%= ENV.fetch("DATABASE_HOST", "aktive_solutions-db") %>
+    username: <%= ENV.fetch("DATABASE_USER", "aktive_solutions") %>
     password: <%= ENV["AKTIVE_SOLUTIONS_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Deploy AktiveSolutions to westeros.
+#
+# The container registry lives on westeros, bound to 127.0.0.1:5000. This script
+# opens an SSH tunnel mapping THIS machine's 127.0.0.1:5000 to westeros:5000, so
+# the local `docker build --push` (and Kamal's registry login) reach the westeros
+# registry, while westeros itself pulls from its own loopback. Then it runs Kamal.
+#
+# Usage: bin/deploy            # full deploy
+#        bin/deploy <command>  # any kamal command through the tunnel (e.g. logs)
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+CONTROL="$(mktemp -u /tmp/aktivesolutions-tunnel.XXXXXX)"
+cleanup() { ssh -S "$CONTROL" -O exit westeros 2>/dev/null || true; }
+trap cleanup EXIT
+
+if ss -tln 2>/dev/null | grep -q '127.0.0.1:5000 '; then
+  echo "!! Local port 5000 is already in use; free it before deploying." >&2
+  exit 1
+fi
+
+echo ">> Opening registry tunnel to westeros (127.0.0.1:5000 -> westeros:5000)…"
+ssh -M -S "$CONTROL" -fN -L 127.0.0.1:5000:127.0.0.1:5000 westeros
+
+echo ">> Running: kamal ${*:-deploy}"
+bin/kamal "${@:-deploy}"
