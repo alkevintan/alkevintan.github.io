@@ -1,0 +1,30 @@
+<% set_meta title: "Sign in", noindex: true %>
+
+<section class="site-container flex min-h-[70vh] items-center justify-center py-16">
+  <div class="w-full max-w-sm">
+    <div class="mb-6 text-center">
+      <h1 class="text-2xl">Admin sign in</h1>
+      <p class="mt-1 text-sm text-slate-500">Access the <%= SITE[:name] %> dashboard.</p>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+      <%= form_with url: session_url, class: "space-y-5" do |form| %>
+        <div>
+          <%= form.label :email_address, "Email", class: "block text-sm font-medium text-slate-700" %>
+          <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username",
+                value: params[:email_address],
+                class: "mt-1.5 block w-full rounded-lg border border-slate-300 px-3.5 py-2.5 focus:border-brand-500" %>
+        </div>
+        <div>
+          <%= form.label :password, "Password", class: "block text-sm font-medium text-slate-700" %>
+          <%= form.password_field :password, required: true, autocomplete: "current-password", maxlength: 72,
+                class: "mt-1.5 block w-full rounded-lg border border-slate-300 px-3.5 py-2.5 focus:border-brand-500" %>
+        </div>
+        <%= form.submit "Sign in", class: "btn btn-brand w-full cursor-pointer" %>
+      <% end %>
+      <div class="mt-4 text-center">
+        <%= link_to "Forgot password?", new_password_path, class: "text-sm text-slate-500 hover:text-brand-600" %>
+      </div>
+    </div>
+  </div>
+</section>

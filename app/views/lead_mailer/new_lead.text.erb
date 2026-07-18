@@ -1,0 +1,17 @@
+New lead from the website
+==========================
+
+Name:    <%= @lead.name %>
+Email:   <%= @lead.email %>
+<% if @lead.phone.present? %>Phone:   <%= @lead.phone %>
+<% end %><% if @lead.company.present? %>Company: <%= @lead.company %>
+<% end %><% if @lead.project_type.present? %>Project: <%= @lead.project_type %>
+<% end %><% if @lead.budget_range.present? %>Budget:  <%= @lead.budget_range %>
+<% end %><% if @lead.timeline.present? %>Timeline: <%= @lead.timeline %>
+<% end %><% if @lead.source_page.present? %>Source:  <%= @lead.source_page %>
+<% end %>
+Message:
+<%= @lead.message %>
+
+--
+Reply directly to this email to respond to <%= @lead.name %>.

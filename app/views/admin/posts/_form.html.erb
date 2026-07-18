@@ -1,0 +1,85 @@
+<%= form_with model: [:admin, post], class: "space-y-6" do |f| %>
+  <% if post.errors.any? %>
+    <div class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+      <ul class="list-disc pl-5"><% post.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul>
+    </div>
+  <% end %>
+
+  <div class="grid gap-6 lg:grid-cols-3">
+    <div class="lg:col-span-2 space-y-6">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
+        <div>
+          <%= f.label :title, class: admin_label_class %>
+          <%= f.text_field :title, class: admin_input_class %>
+        </div>
+        <div>
+          <%= f.label :excerpt, "Excerpt (shown in listings & meta description fallback)", class: admin_label_class %>
+          <%= f.text_area :excerpt, rows: 2, class: admin_input_class %>
+        </div>
+        <div>
+          <%= f.label :body, class: admin_label_class %>
+          <div class="mt-1.5 rounded-lg border border-slate-300 bg-white"><%= f.rich_text_area :body %></div>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
+        <h3 class="text-sm font-semibold text-slate-900">SEO</h3>
+        <div>
+          <%= f.label :meta_title, "Meta title (optional, defaults to title)", class: admin_label_class %>
+          <%= f.text_field :meta_title, class: admin_input_class %>
+        </div>
+        <div>
+          <%= f.label :meta_description, "Meta description (optional, defaults to excerpt)", class: admin_label_class %>
+          <%= f.text_area :meta_description, rows: 2, class: admin_input_class %>
+        </div>
+        <div>
+          <%= f.label :slug, "Slug (leave blank to auto-generate)", class: admin_label_class %>
+          <%= f.text_field :slug, class: admin_input_class %>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
+        <div>
+          <%= f.label :status, class: admin_label_class %>
+          <%= f.select :status, Post.statuses.keys.map { |s| [s.humanize, s] }, {}, class: admin_input_class %>
+        </div>
+        <div>
+          <%= f.label :published_at, "Publish date (optional)", class: admin_label_class %>
+          <%= f.datetime_field :published_at, value: post.published_at&.strftime("%Y-%m-%dT%H:%M"), class: admin_input_class %>
+        </div>
+        <div>
+          <%= f.label :category, class: admin_label_class %>
+          <%= f.text_field :category, placeholder: "e.g. Web Development", class: admin_input_class %>
+        </div>
+        <div>
+          <%= f.label :tags, "Tags (comma-separated)", class: admin_label_class %>
+          <%= f.text_field :tags, class: admin_input_class %>
+        </div>
+        <div>
+          <%= f.label :author, class: admin_label_class %>
+          <%= f.text_field :author, class: admin_input_class %>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-4">
+        <%= f.label :og_image, "Cover / OG image", class: admin_label_class %>
+        <% if post.og_image.attached? %>
+          <%= image_tag post.og_image.variant(resize_to_limit: [400, 225]), class: "rounded-lg" %>
+        <% end %>
+        <%= f.file_field :og_image, accept: "image/*", class: "block w-full text-sm text-slate-600" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <%= f.submit(post.persisted? ? "Update post" : "Create post", class: "btn btn-brand cursor-pointer") %>
+    <%= link_to "Cancel", admin_posts_path, class: "text-sm text-slate-500" %>
+    <% if post.persisted? %>
+      <%= button_to "Delete", admin_post_path(post), method: :delete,
+            form: { data: { turbo_confirm: "Delete this post?" }, class: "ml-auto" },
+            class: "text-sm font-medium text-red-600 hover:underline" %>
+    <% end %>
+  </div>
+<% end %>

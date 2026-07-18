@@ -1,0 +1,24 @@
+<%# Locals: post %>
+<%= link_to blog_post_path(post), class: "group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md" do %>
+  <div class="aspect-[16/9] w-full overflow-hidden bg-slate-100">
+    <% if post.og_image.attached? %>
+      <%= image_tag post.og_image.variant(resize_to_fill: [800, 450]), alt: post.title,
+            loading: "lazy", class: "h-full w-full object-cover transition group-hover:scale-105" %>
+    <% else %>
+      <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-brand-500 to-brand-700 text-white/90">
+        <span class="font-display text-lg font-bold"><%= SITE[:name] %></span>
+      </div>
+    <% end %>
+  </div>
+  <div class="flex flex-1 flex-col p-6">
+    <% if post.category.present? %>
+      <span class="eyebrow"><%= post.category %></span>
+    <% end %>
+    <h3 class="mt-2 text-lg font-semibold text-slate-900 group-hover:text-brand-600"><%= post.title %></h3>
+    <p class="mt-2 line-clamp-3 flex-1 text-sm text-slate-600"><%= post.excerpt %></p>
+    <div class="mt-4 flex items-center gap-3 text-xs text-slate-500">
+      <% if post.published_at %><time datetime="<%= post.published_at.iso8601 %>"><%= post.published_at.strftime("%b %-d, %Y") %></time><span>·</span><% end %>
+      <span><%= post.reading_minutes %> min read</span>
+    </div>
+  </div>
+<% end %>

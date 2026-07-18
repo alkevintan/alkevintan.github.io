@@ -1,0 +1,18 @@
+<h2 style="font-family:sans-serif;color:#0f172a;">New lead from the website</h2>
+<table style="font-family:sans-serif;color:#334155;border-collapse:collapse;font-size:14px;">
+  <tr><td style="padding:4px 12px 4px 0;font-weight:bold;">Name</td><td><%= @lead.name %></td></tr>
+  <tr><td style="padding:4px 12px 4px 0;font-weight:bold;">Email</td><td><%= link_to @lead.email, "mailto:#{@lead.email}" %></td></tr>
+  <% if @lead.phone.present? %><tr><td style="padding:4px 12px 4px 0;font-weight:bold;">Phone</td><td><%= @lead.phone %></td></tr><% end %>
+  <% if @lead.company.present? %><tr><td style="padding:4px 12px 4px 0;font-weight:bold;">Company</td><td><%= @lead.company %></td></tr><% end %>
+  <% if @lead.project_type.present? %><tr><td style="padding:4px 12px 4px 0;font-weight:bold;">Project</td><td><%= @lead.project_type %></td></tr><% end %>
+  <% if @lead.budget_range.present? %><tr><td style="padding:4px 12px 4px 0;font-weight:bold;">Budget</td><td><%= @lead.budget_range %></td></tr><% end %>
+  <% if @lead.timeline.present? %><tr><td style="padding:4px 12px 4px 0;font-weight:bold;">Timeline</td><td><%= @lead.timeline %></td></tr><% end %>
+  <% if @lead.source_page.present? %><tr><td style="padding:4px 12px 4px 0;font-weight:bold;">Source</td><td><%= @lead.source_page %></td></tr><% end %>
+</table>
+<h3 style="font-family:sans-serif;color:#0f172a;">Message</h3>
+<p style="font-family:sans-serif;color:#334155;font-size:14px;white-space:pre-wrap;"><%= @lead.message %></p>
+<hr>
+<p style="font-family:sans-serif;color:#94a3b8;font-size:12px;">
+  Received <%= @lead.created_at&.strftime("%B %-d, %Y at %-I:%M %p") %>.
+  Reply directly to this email to respond to <%= @lead.name %>.
+</p>

@@ -1,0 +1,46 @@
+<% set_meta title: @case_study.title,
+     description: @case_study.meta_description.presence || @case_study.summary,
+     type: "article",
+     image: (@case_study.cover_image.attached? ? rails_blob_path(@case_study.cover_image, only_path: true) : nil) %>
+
+<%= render "shared/page_header", eyebrow: [@case_study.client, @case_study.industry].compact_blank.join(" · "),
+      title: @case_study.title,
+      subtitle: @case_study.summary %>
+
+<section class="site-container max-w-4xl py-14">
+  <% if @case_study.cover_image.attached? %>
+    <%= image_tag @case_study.cover_image.variant(resize_to_limit: [1200, 675]), alt: @case_study.title,
+          class: "mb-10 w-full rounded-2xl" %>
+  <% end %>
+
+  <div class="grid gap-10 lg:grid-cols-3">
+    <div class="prose-content lg:col-span-2">
+      <%= @case_study.body %>
+    </div>
+
+    <aside class="space-y-6">
+      <% if @case_study.tech_list.any? %>
+        <div class="card">
+          <h2 class="text-sm font-semibold text-slate-900">Tech stack</h2>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <% @case_study.tech_list.each do |t| %>
+              <span class="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-600"><%= t %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <% if @case_study.results.present? %>
+        <div class="card">
+          <h2 class="text-sm font-semibold text-slate-900">Results</h2>
+          <p class="mt-2 text-sm text-slate-600"><%= @case_study.results %></p>
+        </div>
+      <% end %>
+      <% if @case_study.url.present? %>
+        <%= link_to "Visit the live site &rarr;".html_safe, @case_study.url, target: "_blank", rel: "noopener",
+              class: "btn btn-outline w-full" %>
+      <% end %>
+    </aside>
+  </div>
+</section>
+
+<%= render "shared/cta" %>

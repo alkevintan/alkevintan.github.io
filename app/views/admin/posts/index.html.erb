@@ -1,0 +1,38 @@
+<% content_for :title, "Blog Posts" %>
+
+<div class="mb-5 flex justify-end">
+  <%= link_to "+ New post", new_admin_post_path, class: "btn btn-brand" %>
+</div>
+
+<div class="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+  <% if @posts.any? %>
+    <table class="w-full text-sm">
+      <thead class="border-b border-slate-200 text-left text-xs uppercase tracking-wider text-slate-400">
+        <tr>
+          <th class="px-5 py-3 font-medium">Title</th>
+          <th class="px-5 py-3 font-medium">Category</th>
+          <th class="px-5 py-3 font-medium">Status</th>
+          <th class="px-5 py-3 font-medium">Published</th>
+          <th class="px-5 py-3"></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        <% @posts.each do |post| %>
+          <tr class="hover:bg-slate-50">
+            <td class="px-5 py-3"><%= link_to post.title, edit_admin_post_path(post), class: "font-medium text-brand-600" %></td>
+            <td class="px-5 py-3 text-slate-600"><%= post.category.presence || "—" %></td>
+            <td class="px-5 py-3">
+              <span class="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium <%= post.published? ? 'bg-green-100 text-green-800' : 'bg-slate-200 text-slate-600' %>"><%= post.status.humanize %></span>
+            </td>
+            <td class="px-5 py-3 text-slate-500"><%= post.published_at&.strftime("%b %-d, %Y") || "—" %></td>
+            <td class="px-5 py-3 text-right">
+              <% if post.published? %><%= link_to "View", blog_post_path(post), target: "_blank", class: "text-sm text-slate-500 hover:text-brand-600" %><% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="px-5 py-12 text-center text-slate-500">No posts yet. <%= link_to "Write your first post", new_admin_post_path, class: "font-medium text-brand-600" %>.</p>
+  <% end %>
+</div>

@@ -2,7 +2,7 @@
 
 # Dynamic robots.txt — allows crawling + points to the sitemap in production,
 # and blocks everything in non-production environments.
-class RobotsController < ApplicationController
+class RobotsController < PublicController
   def index
     respond_to do |format|
       format.text { render layout: false }

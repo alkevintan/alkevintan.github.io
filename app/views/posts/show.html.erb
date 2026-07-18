@@ -1,0 +1,69 @@
+<% set_meta title: @post.meta_title_or_default,
+     description: @post.meta_description_or_default,
+     type: "article",
+     image: (@post.og_image.attached? ? rails_blob_path(@post.og_image, only_path: true) : nil) %>
+
+<% content_for :json_ld do %>
+  <%
+    article = {
+      "@context" => "https://schema.org", "@type" => "Article",
+      "headline" => @post.title,
+      "description" => @post.meta_description_or_default,
+      "datePublished" => @post.published_at&.iso8601,
+      "dateModified" => @post.updated_at.iso8601,
+      "author" => { "@type" => "Organization", "name" => (@post.author.presence || SITE[:name]) },
+      "publisher" => { "@type" => "Organization", "name" => SITE[:name] },
+      "mainEntityOfPage" => absolute_url(blog_post_path(@post))
+    }
+    article["image"] = meta_image if @post.og_image.attached?
+  %>
+  <script type="application/ld+json"><%= raw article.to_json %></script>
+<% end %>
+
+<article class="site-container max-w-3xl py-14">
+  <nav class="mb-6 text-sm text-slate-500" aria-label="Breadcrumb">
+    <%= link_to "Blog", blog_path, class: "hover:text-brand-600" %> <span aria-hidden="true">/</span>
+    <span class="text-slate-700"><%= @post.category.presence || "Article" %></span>
+  </nav>
+
+  <header>
+    <% if @post.category.present? %><p class="eyebrow"><%= @post.category %></p><% end %>
+    <h1 class="mt-3 text-4xl sm:text-5xl"><%= @post.title %></h1>
+    <div class="mt-5 flex flex-wrap items-center gap-3 text-sm text-slate-500">
+      <span><%= @post.author.presence || SITE[:name] %></span><span>·</span>
+      <% if @post.published_at %><time datetime="<%= @post.published_at.iso8601 %>"><%= @post.published_at.strftime("%B %-d, %Y") %></time><span>·</span><% end %>
+      <span><%= @post.reading_minutes %> min read</span>
+    </div>
+  </header>
+
+  <% if @post.og_image.attached? %>
+    <%= image_tag @post.og_image.variant(resize_to_limit: [1200, 675]), alt: @post.title,
+          class: "mt-8 w-full rounded-2xl" %>
+  <% end %>
+
+  <div class="prose-content mt-10">
+    <%= @post.body %>
+  </div>
+
+  <% if @post.tag_list.any? %>
+    <div class="mt-10 flex flex-wrap gap-2">
+      <% @post.tag_list.each do |tag| %>
+        <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">#<%= tag %></span>
+      <% end %>
+    </div>
+  <% end %>
+</article>
+
+<% related = @post.related %>
+<% if related.any? %>
+  <section class="border-t border-slate-200 bg-slate-50 py-16">
+    <div class="site-container">
+      <h2 class="text-2xl">Related articles</h2>
+      <div class="mt-8 grid gap-8 md:grid-cols-3">
+        <%= render partial: "posts/post_card", collection: related, as: :post %>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<%= render "shared/cta" %>

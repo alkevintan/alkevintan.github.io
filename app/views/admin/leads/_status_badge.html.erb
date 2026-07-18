@@ -1,0 +1,13 @@
+<%#  Locals: lead %>
+<%
+  colors = {
+    "new_lead" => "bg-brand-100 text-brand-800",
+    "contacted" => "bg-amber-100 text-amber-800",
+    "qualified" => "bg-indigo-100 text-indigo-800",
+    "won" => "bg-green-100 text-green-800",
+    "lost" => "bg-slate-200 text-slate-600"
+  }
+%>
+<span class="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium <%= colors[lead.status] %>">
+  <%= lead.status_label %>
+</span>

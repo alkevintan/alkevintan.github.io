@@ -1,0 +1,50 @@
+<% set_meta title: "Portfolio",
+     description: "Selected web and mobile app projects delivered by AktiveSolutions for businesses in the Philippines." %>
+
+<%= render "shared/page_header", eyebrow: "Our work",
+      title: "Portfolio",
+      subtitle: "A selection of the websites, web apps and mobile apps we've built and shipped." %>
+
+<section class="site-container py-16">
+  <% if @case_studies.any? %>
+    <div class="grid gap-8 md:grid-cols-2">
+      <% @case_studies.each do |cs| %>
+        <%= link_to portfolio_item_path(cs), class: "group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md" do %>
+          <div class="aspect-[16/9] w-full overflow-hidden bg-slate-100">
+            <% if cs.cover_image.attached? %>
+              <%= image_tag cs.cover_image.variant(resize_to_fill: [900, 506]), alt: cs.title,
+                    loading: "lazy", class: "h-full w-full object-cover transition group-hover:scale-105" %>
+            <% else %>
+              <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-800 to-slate-950 text-white/80">
+                <span class="font-display text-lg font-bold"><%= cs.title %></span>
+              </div>
+            <% end %>
+          </div>
+          <div class="flex flex-1 flex-col p-6">
+            <div class="flex items-center gap-2 text-xs text-slate-500">
+              <% if cs.client.present? %><span><%= cs.client %></span><% end %>
+              <% if cs.industry.present? %><span>·</span><span><%= cs.industry %></span><% end %>
+            </div>
+            <h3 class="mt-2 text-xl font-semibold text-slate-900 group-hover:text-brand-600"><%= cs.title %></h3>
+            <p class="mt-2 flex-1 text-sm text-slate-600"><%= cs.summary %></p>
+            <% if cs.tech_list.any? %>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <% cs.tech_list.first(4).each do |t| %>
+                  <span class="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-600"><%= t %></span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="rounded-2xl border border-dashed border-slate-300 p-12 text-center">
+      <p class="text-lg font-medium text-slate-900">Case studies are coming soon.</p>
+      <p class="mt-2 text-slate-600">Want to be our next success story?
+        <%= link_to "Start a project", contact_path, class: "font-medium text-brand-600" %>.</p>
+    </div>
+  <% end %>
+</section>
+
+<%= render "shared/cta" %>

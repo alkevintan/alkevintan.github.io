@@ -2,7 +2,7 @@
 
 # Dynamic XML sitemap. Lists the static marketing pages plus any published
 # blog posts / case studies once those models exist.
-class SitemapsController < ApplicationController
+class SitemapsController < PublicController
   def index
     @entries = static_entries + dynamic_entries
     respond_to { |format| format.xml { render layout: false } }
@@ -28,17 +28,13 @@ class SitemapsController < ApplicationController
 
   def dynamic_entries
     entries = []
-    if defined?(Post) && Post.table_exists?
-      Post.respond_to?(:published) && Post.published.find_each do |post|
-        entries << { loc: absolute(blog_post_path(post)), lastmod: post.updated_at.iso8601,
-                     changefreq: "monthly", priority: "0.6" }
-      end
+    Post.live.recent.find_each do |post|
+      entries << { loc: absolute(blog_post_path(post)), lastmod: post.updated_at.iso8601,
+                   changefreq: "monthly", priority: "0.6" }
     end
-    if defined?(CaseStudy) && CaseStudy.table_exists?
-      CaseStudy.find_each do |cs|
-        entries << { loc: absolute(portfolio_item_path(cs)), lastmod: cs.updated_at.iso8601,
-                     changefreq: "yearly", priority: "0.5" }
-      end
+    CaseStudy.live.ordered.find_each do |cs|
+      entries << { loc: absolute(portfolio_item_path(cs)), lastmod: cs.updated_at.iso8601,
+                   changefreq: "yearly", priority: "0.5" }
     end
     entries
   rescue StandardError

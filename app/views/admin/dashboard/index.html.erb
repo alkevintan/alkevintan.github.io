@@ -1,0 +1,46 @@
+<% content_for :title, "Dashboard" %>
+
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  <% [
+    ["New leads", @new_leads, admin_leads_path(status: "new_lead"), "text-brand-700 bg-brand-50"],
+    ["Total leads", @total_leads, admin_leads_path, "text-slate-700 bg-slate-100"],
+    ["Published posts", @published_posts, admin_posts_path, "text-amber-700 bg-amber-50"],
+    ["Case studies", @case_studies_count, admin_case_studies_path, "text-slate-700 bg-slate-100"]
+  ].each do |label, value, path, klass| %>
+    <%= link_to path, class: "rounded-2xl border border-slate-200 bg-white p-5 transition hover:shadow-sm" do %>
+      <span class="inline-flex rounded-lg px-2 py-0.5 text-xs font-medium <%= klass %>"><%= label %></span>
+      <p class="mt-3 text-3xl font-bold text-slate-900"><%= value %></p>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="mt-8 rounded-2xl border border-slate-200 bg-white">
+  <div class="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+    <h2 class="font-semibold text-slate-900">Recent leads</h2>
+    <%= link_to "View all", admin_leads_path, class: "text-sm font-medium text-brand-600" %>
+  </div>
+  <% if @recent_leads.any? %>
+    <table class="w-full text-sm">
+      <thead class="text-left text-xs uppercase tracking-wider text-slate-400">
+        <tr>
+          <th class="px-5 py-3 font-medium">Name</th>
+          <th class="px-5 py-3 font-medium">Project</th>
+          <th class="px-5 py-3 font-medium">Status</th>
+          <th class="px-5 py-3 font-medium">Received</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        <% @recent_leads.each do |lead| %>
+          <tr class="hover:bg-slate-50">
+            <td class="px-5 py-3"><%= link_to lead.display_name, admin_lead_path(lead), class: "font-medium text-brand-600" %></td>
+            <td class="px-5 py-3 text-slate-600"><%= lead.project_type.presence || "—" %></td>
+            <td class="px-5 py-3"><%= render "admin/leads/status_badge", lead: lead %></td>
+            <td class="px-5 py-3 text-slate-500"><%= lead.created_at.strftime("%b %-d, %Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="px-5 py-8 text-center text-slate-500">No leads yet.</p>
+  <% end %>
+</div>

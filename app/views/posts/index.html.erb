@@ -1,0 +1,31 @@
+<% set_meta title: (@category.present? ? "#{@category} Articles" : "Blog"),
+     description: "Guides on web development, mobile apps and SEO for businesses in the Philippines, from the team at AktiveSolutions." %>
+
+<%= render "shared/page_header", eyebrow: "Insights",
+      title: "The AktiveSolutions Blog",
+      subtitle: "Practical guides on web, mobile and SEO for Philippine businesses." %>
+
+<section class="site-container py-16">
+  <% if @categories.any? %>
+    <div class="mb-10 flex flex-wrap gap-2">
+      <%= link_to "All", blog_path,
+            class: "rounded-full px-4 py-1.5 text-sm font-medium #{@category.nil? ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}" %>
+      <% @categories.each do |cat| %>
+        <%= link_to cat, blog_path(category: cat),
+              class: "rounded-full px-4 py-1.5 text-sm font-medium #{@category == cat ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @posts.any? %>
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <%= render partial: "posts/post_card", collection: @posts, as: :post %>
+    </div>
+  <% else %>
+    <div class="rounded-2xl border border-dashed border-slate-300 p-12 text-center">
+      <p class="text-lg font-medium text-slate-900">Articles are on the way.</p>
+      <p class="mt-2 text-slate-600">We're publishing guides on web, mobile and SEO soon. In the meantime,
+        <%= link_to "get a free quote", contact_path, class: "font-medium text-brand-600" %>.</p>
+    </div>
+  <% end %>
+</section>
