@@ -80,4 +80,6 @@ accessories:
       secret:
         - POSTGRES_PASSWORD
     volumes:
-      - "aktive_solutions_db_data:/var/lib/postgresql/data"
+      # postgres:18 stores data in a version-specific subdir, so the volume must
+      # mount the parent /var/lib/postgresql (not /var/lib/postgresql/data).
+      - "aktive_solutions_db_data:/var/lib/postgresql"
