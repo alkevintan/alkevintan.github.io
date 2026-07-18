@@ -1,0 +1,14 @@
+<% set_meta title: "Privacy Policy",
+     description: "How AktiveSolutions collects and uses your information." %>
+
+<%= render "shared/page_header", title: "Privacy Policy" %>
+
+<section class="site-container py-16 prose-content">
+  <p><em>Last updated: <%= Time.current.strftime("%B %Y") %>.</em></p>
+  <p>This is a placeholder privacy policy for <%= SITE[:name] %>. Replace with your
+     finalized policy before launch. We collect the information you submit through
+     our contact form (such as your name, email and message) solely to respond to
+     your inquiry.</p>
+  <h2>Contact</h2>
+  <p>Questions about this policy? Email <%= link_to SITE[:email], "mailto:#{SITE[:email]}" %>.</p>
+</section>

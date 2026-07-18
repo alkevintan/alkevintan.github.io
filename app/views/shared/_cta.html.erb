@@ -1,0 +1,14 @@
+<%# Site-wide call-to-action band. Locals: title, subtitle (optional). %>
+<section class="bg-brand-600">
+  <div class="site-container py-16 text-center">
+    <h2 class="text-3xl text-white sm:text-4xl">
+      <%= local_assigns.fetch(:title, "Let's build something great together") %>
+    </h2>
+    <p class="mx-auto mt-4 max-w-2xl text-lg text-brand-100">
+      <%= local_assigns.fetch(:subtitle, "Get a free project quote for your website, web app or mobile app — no obligations.") %>
+    </p>
+    <div class="mt-8 flex justify-center">
+      <%= link_to "Get a Free Quote", contact_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</section>

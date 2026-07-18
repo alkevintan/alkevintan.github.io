@@ -1,0 +1,32 @@
+<%# Organization / ProfessionalService structured data (Local SEO: Bicol + PH). %>
+<%
+  org = {
+    "@context" => "https://schema.org",
+    "@type" => "ProfessionalService",
+    "@id" => "#{SITE[:url]}/#organization",
+    "name" => SITE[:name],
+    "url" => SITE[:url],
+    "email" => SITE[:email],
+    "description" => SITE[:description],
+    "image" => absolute_url(SITE[:default_og_image]),
+    "priceRange" => "$$",
+    "areaServed" => SITE[:service_areas].map { |a| { "@type" => "AdministrativeArea", "name" => a } },
+    "address" => {
+      "@type" => "PostalAddress",
+      "addressLocality" => SITE.dig(:address, :locality),
+      "addressRegion" => SITE.dig(:address, :region),
+      "addressCountry" => SITE.dig(:address, :country)
+    },
+    "knowsAbout" => [
+      "Web Development", "Mobile App Development", "Ruby on Rails",
+      "iOS", "Android", "E-commerce", "SEO", "UI/UX Design"
+    ]
+  }
+  org["telephone"] = SITE[:phone] if SITE[:phone].present? && !SITE[:phone].include?("000 000")
+  sameas = SITE[:social].values.reject(&:blank?)
+  org["sameAs"] = sameas if sameas.any?
+%>
+<script type="application/ld+json"><%= raw org.to_json %></script>
+
+<%# Optional per-page structured data (e.g. Article, BreadcrumbList, FAQPage) %>
+<%= yield :json_ld if content_for?(:json_ld) %>

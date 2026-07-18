@@ -1,0 +1,23 @@
+<% set_meta title: "Services",
+     description: "Web development, web apps, and mobile app development for Philippine businesses. See how AktiveSolutions can help you build and grow." %>
+
+<%= render "shared/page_header", eyebrow: "What we do",
+      title: "Services",
+      subtitle: "Design, development and growth for web and mobile — built for the Philippine market." %>
+
+<section class="site-container py-16">
+  <div class="grid gap-6 md:grid-cols-2">
+    <%= link_to web_development_path, class: "card block" do %>
+      <h2 class="text-xl font-semibold text-slate-900">Web Development</h2>
+      <p class="mt-2 text-slate-600">Marketing sites, e-commerce, dashboards and custom web apps.</p>
+      <span class="mt-4 inline-block text-sm font-semibold text-brand-600">Learn more &rarr;</span>
+    <% end %>
+    <%= link_to mobile_development_path, class: "card block" do %>
+      <h2 class="text-xl font-semibold text-slate-900">Mobile App Development</h2>
+      <p class="mt-2 text-slate-600">Native and cross-platform iOS &amp; Android applications.</p>
+      <span class="mt-4 inline-block text-sm font-semibold text-brand-600">Learn more &rarr;</span>
+    <% end %>
+  </div>
+</section>
+
+<%= render "shared/cta" %>

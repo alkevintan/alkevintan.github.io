@@ -1,0 +1,17 @@
+<% flash.each do |type, message| %>
+  <% next if message.blank? %>
+  <%
+    styles = {
+      "notice"  => "bg-green-50 text-green-800 border-green-200",
+      "success" => "bg-green-50 text-green-800 border-green-200",
+      "alert"   => "bg-red-50 text-red-800 border-red-200",
+      "error"   => "bg-red-50 text-red-800 border-red-200"
+    }
+    klass = styles[type.to_s] || "bg-brand-50 text-brand-800 border-brand-200"
+  %>
+  <div class="site-container mt-4">
+    <div class="rounded-xl border px-4 py-3 text-sm font-medium <%= klass %>" role="status">
+      <%= message %>
+    </div>
+  </div>
+<% end %>

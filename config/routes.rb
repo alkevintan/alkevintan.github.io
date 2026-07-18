@@ -1,14 +1,26 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Health check for load balancers / uptime monitors.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  root "pages#home"
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Marketing pages
+  get "about",     to: "pages#about"
+  get "services",  to: "pages#services"
+  get "services/web-development",        to: "pages#web_development",    as: :web_development
+  get "services/mobile-app-development", to: "pages#mobile_development", as: :mobile_development
+  get "portfolio", to: "pages#portfolio"
+  get "privacy",   to: "pages#privacy"
+  get "terms",     to: "pages#terms"
+  get "thank-you", to: "pages#thank_you", as: :thank_you
+
+  # Contact + lead capture (fleshed out in the Leads task; placeholder for now)
+  get "contact", to: "pages#contact"
+
+  # Blog (fleshed out in the Blog task; placeholder for now)
+  get "blog", to: "pages#blog"
+
+  # SEO machine-readable files
+  get "sitemap.xml", to: "sitemaps#index", as: :sitemap, defaults: { format: "xml" }
+  get "robots.txt",  to: "robots#index",   as: :robots,  defaults: { format: "text" }
 end

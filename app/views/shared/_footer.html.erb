@@ -1,0 +1,80 @@
+<footer class="mt-24 border-t border-slate-800 bg-slate-950 text-slate-400">
+  <div class="site-container py-14">
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <%# Brand + blurb %>
+      <div class="lg:col-span-1">
+        <%= link_to root_path, class: "text-white", aria: { label: "#{SITE[:name]} home" } do %>
+          <%= render "shared/logo" %>
+        <% end %>
+        <p class="mt-4 text-sm leading-relaxed">
+          Web &amp; mobile app development for businesses in Bicol and across the Philippines.
+        </p>
+        <% socials = SITE[:social].reject { |_, v| v.blank? } %>
+        <% if socials.any? %>
+          <div class="mt-5 flex gap-4">
+            <% socials.each do |name, url| %>
+              <%= link_to url, class: "text-slate-400 hover:text-white", rel: "noopener", target: "_blank" do %>
+                <span class="text-sm capitalize"><%= name %></span>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <%# Company %>
+      <div>
+        <h3 class="text-sm font-semibold text-white">Company</h3>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          <li><%= link_to "Services", services_path, class: "hover:text-white" %></li>
+          <li><%= link_to "Portfolio", portfolio_path, class: "hover:text-white" %></li>
+          <li><%= link_to "Blog", blog_path, class: "hover:text-white" %></li>
+          <li><%= link_to "About", about_path, class: "hover:text-white" %></li>
+          <li><%= link_to "Contact", contact_path, class: "hover:text-white" %></li>
+        </ul>
+      </div>
+
+      <%# Services %>
+      <div>
+        <h3 class="text-sm font-semibold text-white">Services</h3>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          <li><%= link_to "Web Development", web_development_path, class: "hover:text-white" %></li>
+          <li><%= link_to "Mobile App Development", mobile_development_path, class: "hover:text-white" %></li>
+          <li><%= link_to "Get a Free Quote", contact_path, class: "hover:text-white" %></li>
+        </ul>
+      </div>
+
+      <%# Contact / NAP %>
+      <div>
+        <h3 class="text-sm font-semibold text-white">Get in touch</h3>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          <li>
+            <%= link_to SITE[:email], "mailto:#{SITE[:email]}", class: "hover:text-white" %>
+          </li>
+          <% if SITE[:phone].present? && !SITE[:phone].include?("000 000") %>
+            <li><%= link_to SITE[:phone], "tel:#{SITE[:phone_link]}", class: "hover:text-white" %></li>
+          <% end %>
+          <li class="text-slate-500">
+            <%= SITE.dig(:address, :locality) %>, <%= SITE.dig(:address, :region) %><br>
+            <%= SITE.dig(:address, :country_name) %>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <%# Service areas — local SEO signal %>
+    <div class="mt-12 border-t border-slate-800 pt-6">
+      <p class="text-xs text-slate-500">
+        <span class="font-medium text-slate-400">Serving:</span>
+        <%= SITE[:service_areas].join(" · ") %>
+      </p>
+    </div>
+
+    <div class="mt-6 flex flex-col items-start justify-between gap-3 text-xs text-slate-500 sm:flex-row sm:items-center">
+      <p>&copy; <%= Time.current.year %> <%= SITE[:legal_name] %>. All rights reserved.</p>
+      <div class="flex gap-5">
+        <%= link_to "Privacy", privacy_path, class: "hover:text-white" %>
+        <%= link_to "Terms", terms_path, class: "hover:text-white" %>
+      </div>
+    </div>
+  </div>
+</footer>

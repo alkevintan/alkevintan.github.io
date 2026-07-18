@@ -1,0 +1,16 @@
+<%# Brand logo: geometric "activity pulse" mark + wordmark.
+    The wordmark text uses currentColor so it adapts to dark/light placement.
+    Locals: classes (wrapper), mark_only (bool). %>
+<span class="inline-flex items-center gap-2.5 <%= local_assigns[:classes] %>">
+  <svg viewBox="0 0 40 40" class="h-8 w-8 flex-none" fill="none" aria-hidden="true" role="img">
+    <rect width="40" height="40" rx="10" fill="#4f46e5"/>
+    <path d="M8 24 L15 24 L18 14 L23 30 L26 20 L32 20"
+          stroke="#fbbf24" stroke-width="3" stroke-linecap="round"
+          stroke-linejoin="round" fill="none"/>
+  </svg>
+  <% unless local_assigns[:mark_only] %>
+    <span class="font-display text-xl font-extrabold tracking-tight leading-none">
+      Aktive<span class="text-brand-500">Solutions</span>
+    </span>
+  <% end %>
+</span>
