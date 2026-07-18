@@ -1,0 +1,50 @@
+# Rails .gitignore template
+# Copy this into your Rails project root and rename to .gitignore
+
+# Rails
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/storage/*
+!/storage/.keep
+/public/assets
+/public/packs
+/public/packs-test
+
+# Ruby
+*.gem
+.bundle
+vendor/bundle
+.ruby-version
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+
+# Database
+*.sql
+*.sqlite3
+*.sqlite3-journal
+
+# Ignore key files for decrypting credentials and more.
+/config/*.key
+
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
