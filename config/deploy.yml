@@ -43,6 +43,7 @@ env:
   secret:
     - RAILS_MASTER_KEY
     - AKTIVE_SOLUTIONS_DATABASE_PASSWORD
+    - ADMIN_PASSWORD
   clear:
     # App reaches the Postgres accessory by its network alias.
     DATABASE_HOST: aktive_solutions-db
