@@ -1,4 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: %("#{SITE[:name]}" <#{SITE[:email]}>)
+  # From must be an address on a domain verified with the SMTP provider (Resend).
+  # Override with MAILER_FROM env (e.g. "AktiveSolutions <noreply@aktivesolutions.com>").
+  default from: ENV.fetch("MAILER_FROM") { %("#{SITE[:name]}" <#{SITE[:email]}>) }
   layout "mailer"
 end

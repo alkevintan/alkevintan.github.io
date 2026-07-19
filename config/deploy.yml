@@ -44,6 +44,7 @@ env:
     - RAILS_MASTER_KEY
     - AKTIVE_SOLUTIONS_DATABASE_PASSWORD
     - ADMIN_PASSWORD
+    - SMTP_PASSWORD
   clear:
     # App reaches the Postgres accessory by its network alias.
     DATABASE_HOST: aktive_solutions-db
@@ -52,6 +53,17 @@ env:
     APP_HOST: aktivesolutions.com
     # Run Solid Queue inside Puma (single-server home deploy).
     SOLID_QUEUE_IN_PUMA: true
+    # Outbound email via Resend SMTP (API key is the SMTP_PASSWORD secret above).
+    SMTP_ADDRESS: smtp.resend.com
+    SMTP_PORT: "587"
+    SMTP_USER_NAME: resend
+    SMTP_DOMAIN: aktivesolutions.com
+    SMTP_AUTHENTICATION: plain
+    # From must be on the Resend-verified domain.
+    MAILER_FROM: AktiveSolutions <noreply@aktivesolutions.com>
+    # Where new-lead alerts are delivered. Defaults to hello@aktivesolutions.com
+    # (needs a real mailbox). Uncomment to route leads to any inbox instead:
+    # LEAD_NOTIFICATION_TO: you@example.com
 
 aliases:
   console: app exec --interactive --reuse "bin/rails console"
