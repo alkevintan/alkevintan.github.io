@@ -59,8 +59,8 @@ env:
     SMTP_USER_NAME: resend
     SMTP_DOMAIN: aktivesolutions.com
     SMTP_AUTHENTICATION: plain
-    # From must be on the Resend-verified domain (the send. subdomain).
-    MAILER_FROM: AktiveSolutions <noreply@send.aktivesolutions.com>
+    # From must be on the Resend-verified domain (the verified apex).
+    MAILER_FROM: AktiveSolutions <noreply@aktivesolutions.com>
     # Where new-lead alerts are delivered. Defaults to hello@aktivesolutions.com
     # (needs a real mailbox). Uncomment to route leads to any inbox instead:
     # LEAD_NOTIFICATION_TO: you@example.com
