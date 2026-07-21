@@ -1,5 +1,4 @@
-<% set_meta title: nil,
-     description: "AktiveSolutions builds fast, SEO-ready websites, web apps and mobile apps for businesses in Bicol and across the Philippines. Get a free project quote today." %>
+<% set_meta title: nil, description: content_text("home", "meta_description") %>
 
 <%# ===== Hero ===== %>
 <section class="relative overflow-hidden bg-slate-950 text-white">
@@ -7,32 +6,24 @@
        style="background:radial-gradient(60rem 30rem at 70% -10%, rgba(5,150,105,.35), transparent 60%),radial-gradient(40rem 25rem at 10% 20%, rgba(245,158,11,.12), transparent 60%)"></div>
   <div class="site-container relative py-20 sm:py-28">
     <div class="max-w-3xl">
-      <p class="eyebrow text-brand-300">Web &amp; Mobile App Development · Philippines</p>
+      <p class="eyebrow text-brand-300"><%= content_block("home", "hero_eyebrow") %></p>
       <h1 class="mt-4 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
-        Software that grows your business — built in the Philippines.
+        <%= content_block("home", "hero_heading") %>
       </h1>
       <p class="mt-6 max-w-2xl text-lg text-slate-300">
-        We design and develop high-performance websites, web apps and mobile apps for
-        startups and SMEs in <strong class="text-white">Bicol</strong> and nationwide.
-        Clean code, on-time delivery, and results you can measure.
+        <%= content_block("home", "hero_body") %>
       </p>
       <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-        <%= link_to "Get a Free Quote", contact_path, class: "btn btn-primary" %>
-        <%= link_to "View Our Services", services_path, class: "btn btn-ghost-light" %>
+        <%= link_to content_block("home", "hero_cta_primary"), contact_path, class: "btn btn-primary" %>
+        <%= link_to content_block("home", "hero_cta_secondary"), services_path, class: "btn btn-ghost-light" %>
       </div>
       <dl class="mt-14 grid max-w-lg grid-cols-3 gap-6">
-        <div>
-          <dt class="text-2xl font-bold text-white">Web</dt>
-          <dd class="text-sm text-slate-400">Sites &amp; web apps</dd>
-        </div>
-        <div>
-          <dt class="text-2xl font-bold text-white">Mobile</dt>
-          <dd class="text-sm text-slate-400">iOS &amp; Android</dd>
-        </div>
-        <div>
-          <dt class="text-2xl font-bold text-white">SEO</dt>
-          <dd class="text-sm text-slate-400">Built to rank</dd>
-        </div>
+        <% content_items("home", "hero_stats").each do |stat| %>
+          <div>
+            <dt class="text-2xl font-bold text-white"><%= raw stat.title %></dt>
+            <dd class="text-sm text-slate-400"><%= raw stat.body %></dd>
+          </div>
+        <% end %>
       </dl>
     </div>
   </div>
@@ -41,27 +32,23 @@
 <%# ===== Services preview ===== %>
 <section class="site-container py-20">
   <div class="mx-auto max-w-2xl text-center">
-    <p class="eyebrow justify-center">What we do</p>
-    <h2 class="mt-3 text-3xl sm:text-4xl">End-to-end product development</h2>
+    <p class="eyebrow justify-center"><%= content_block("home", "services_eyebrow") %></p>
+    <h2 class="mt-3 text-3xl sm:text-4xl"><%= content_block("home", "services_heading") %></h2>
     <p class="mt-4 text-lg text-slate-600">
-      From a marketing site to a full mobile app, we handle design, build and launch.
+      <%= content_block("home", "services_body") %>
     </p>
   </div>
 
   <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-    <% [
-      ["Web Development", "Marketing sites, dashboards and web apps built with modern, maintainable code.", web_development_path],
-      ["Mobile Apps", "Native and cross-platform iOS &amp; Android apps your customers will love.", mobile_development_path],
-      ["SEO &amp; Growth", "Technical SEO and content that helps Philippine businesses get found on Google.", services_path]
-    ].each do |title, body, path| %>
-      <%= link_to path, class: "card group block" do %>
+    <% content_items("home", "services_cards").each do |card| %>
+      <%= link_to(card.meta["path"].presence || "#", class: "card group block") do %>
         <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
           </svg>
         </div>
-        <h3 class="mt-5 text-lg font-semibold text-slate-900"><%= raw title %></h3>
-        <p class="mt-2 text-sm text-slate-600"><%= raw body %></p>
+        <h3 class="mt-5 text-lg font-semibold text-slate-900"><%= raw card.title %></h3>
+        <p class="mt-2 text-sm text-slate-600"><%= raw card.body %></p>
         <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 group-hover:gap-2 transition-all">
           Learn more <span aria-hidden="true">&rarr;</span>
         </span>
@@ -74,32 +61,26 @@
 <section class="bg-slate-50 py-20">
   <div class="site-container grid items-center gap-12 lg:grid-cols-2">
     <div>
-      <p class="eyebrow">Why AktiveSolutions</p>
-      <h2 class="mt-3 text-3xl sm:text-4xl">A local partner that ships quality</h2>
+      <p class="eyebrow"><%= content_block("home", "whyus_eyebrow") %></p>
+      <h2 class="mt-3 text-3xl sm:text-4xl"><%= content_block("home", "whyus_heading") %></h2>
       <p class="mt-4 text-lg text-slate-600">
-        Work directly with the developers building your product — no middlemen, no
-        outsourcing surprises. We combine world-class engineering with local
-        understanding of the Philippine market.
+        <%= content_block("home", "whyus_body") %>
       </p>
       <ul class="mt-8 space-y-4">
-        <% [
-          ["Based in Bicol, serving the Philippines", "Local time zone, local context, easy to reach."],
-          ["Built for performance & SEO", "Fast, mobile-first, and structured to rank on Google."],
-          ["Transparent, fixed-scope quotes", "Know what you're paying before we start."]
-        ].each do |t, d| %>
+        <% content_items("home", "whyus_points").each do |point| %>
           <li class="flex gap-3">
             <svg class="mt-0.5 h-6 w-6 flex-none text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
-            <span><strong class="font-semibold text-slate-900"><%= t %>.</strong> <span class="text-slate-600"><%= d %></span></span>
+            <span><strong class="font-semibold text-slate-900"><%= raw point.title %>.</strong> <span class="text-slate-600"><%= raw point.body %></span></span>
           </li>
         <% end %>
       </ul>
     </div>
     <div class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-      <h3 class="text-xl">Ready to start your project?</h3>
-      <p class="mt-2 text-slate-600">Tell us what you're building and we'll get back to you with a free, no-obligation quote.</p>
-      <%= link_to "Get a Free Quote", contact_path, class: "btn btn-brand mt-6 w-full" %>
+      <h3 class="text-xl"><%= content_block("home", "whyus_card_heading") %></h3>
+      <p class="mt-2 text-slate-600"><%= content_block("home", "whyus_card_body") %></p>
+      <%= link_to content_block("home", "whyus_card_cta"), contact_path, class: "btn btn-brand mt-6 w-full" %>
       <p class="mt-4 text-center text-sm text-slate-500">or email <%= link_to SITE[:email], "mailto:#{SITE[:email]}", class: "font-medium text-brand-600" %></p>
     </div>
   </div>

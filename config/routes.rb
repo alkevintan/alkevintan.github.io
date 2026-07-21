@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     resources :testimonials
     resources :faqs
     resource :site_setting, only: %i[edit update]
+
+    # Page-copy editor (ContentBlock + ContentItem, driven by PageContent registry)
+    resources :content, only: %i[index edit update], param: :page
   end
 
   # SEO machine-readable files

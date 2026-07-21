@@ -43,6 +43,28 @@ else
 end
 
 # ---------------------------------------------------------------------------
+# Page content (blocks + repeating items, seeded from the PageContent registry)
+# ---------------------------------------------------------------------------
+PageContent::PAGES.each do |page, cfg|
+  cfg[:blocks].each do |block|
+    cb = ContentBlock.find_or_initialize_by(page: page, key: block[:key])
+    cb.content = block[:default] if cb.new_record?
+    cb.save!
+  end
+
+  cfg[:sections].each do |section|
+    next if ContentItem.for_section(page, section[:key]).exists?
+
+    PageContent.default_items(page, section[:key]).each_with_index do |d, i|
+      ContentItem.create!(page: page, section: section[:key],
+                          title: d.title, body: d.body, meta: d.meta,
+                          position: i, published: true)
+    end
+  end
+end
+puts "Content blocks: #{ContentBlock.count}, items: #{ContentItem.count}"
+
+# ---------------------------------------------------------------------------
 # FAQs (seeded from the built-in defaults, then editable in the admin)
 # ---------------------------------------------------------------------------
 Faq::DEFAULTS.each do |page, pairs|

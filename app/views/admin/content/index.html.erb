@@ -1,0 +1,12 @@
+<% content_for :title, "Page Content" %>
+
+<p class="mb-5 text-sm text-slate-500">Edit the copy on each marketing page. Blank fields fall back to the built-in defaults.</p>
+
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  <% @pages.each do |page, label| %>
+    <%= link_to edit_admin_content_path(page), class: "rounded-2xl border border-slate-200 bg-white p-6 hover:border-brand-300 hover:shadow-sm" do %>
+      <h3 class="font-semibold text-slate-900"><%= label %></h3>
+      <p class="mt-1 text-sm text-brand-600">Edit content &rarr;</p>
+    <% end %>
+  <% end %>
+</div>
