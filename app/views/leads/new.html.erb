@@ -1,9 +1,8 @@
-<% set_meta title: "Contact",
-     description: "Get a free quote for your web or mobile app project. Contact AktiveSolutions in Bicol, Philippines." %>
+<% set_meta title: "Contact", description: content_text("contact", "meta_description") %>
 
-<%= render "shared/page_header", eyebrow: "Get in touch",
-      title: "Let's talk about your project",
-      subtitle: "Tell us what you're building and we'll get back to you within one business day with a free, no-obligation quote." %>
+<%= render "shared/page_header", eyebrow: content_block("contact", "header_eyebrow"),
+      title: content_block("contact", "header_title"),
+      subtitle: content_block("contact", "header_subtitle") %>
 
 <section class="site-container py-16">
   <div class="grid gap-12 lg:grid-cols-3">
@@ -52,19 +51,19 @@
           </div>
           <div>
             <%= f.label :project_type, "Project type", class: "block text-sm font-medium text-slate-700" %>
-            <%= f.select :project_type, Lead::PROJECT_TYPES, { prompt: "Select one" },
+            <%= f.select :project_type, lead_options("project_type"), { prompt: "Select one" },
                   class: "mt-1.5 block w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-slate-900 focus:border-brand-500" %>
           </div>
           <div>
             <%= f.label :budget_range, "Budget", class: "block text-sm font-medium text-slate-700" %>
-            <%= f.select :budget_range, Lead::BUDGET_RANGES, { prompt: "Select a range" },
+            <%= f.select :budget_range, lead_options("budget_range"), { prompt: "Select a range" },
                   class: "mt-1.5 block w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-slate-900 focus:border-brand-500" %>
           </div>
         </div>
 
         <div>
           <%= f.label :timeline, "Timeline", class: "block text-sm font-medium text-slate-700" %>
-          <%= f.select :timeline, Lead::TIMELINES, { prompt: "When do you want to start?" },
+          <%= f.select :timeline, lead_options("timeline"), { prompt: "When do you want to start?" },
                 class: "mt-1.5 block w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-slate-900 focus:border-brand-500 sm:max-w-xs" %>
         </div>
 

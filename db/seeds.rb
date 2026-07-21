@@ -65,6 +65,19 @@ end
 puts "Content blocks: #{ContentBlock.count}, items: #{ContentItem.count}"
 
 # ---------------------------------------------------------------------------
+# Contact-form dropdown options, seeded from the built-in defaults
+# ---------------------------------------------------------------------------
+LeadOption::DEFAULTS.each do |field, labels|
+  labels.each_with_index do |label, i|
+    opt = LeadOption.find_or_initialize_by(field: field, label: label)
+    opt.position = i
+    opt.published = true if opt.new_record?
+    opt.save!
+  end
+end
+puts "Lead options: #{LeadOption.count}"
+
+# ---------------------------------------------------------------------------
 # Menu links (header + footer columns), seeded from the built-in defaults
 # ---------------------------------------------------------------------------
 MenuItem::DEFAULTS.each do |menu, links|

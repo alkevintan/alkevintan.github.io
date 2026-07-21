@@ -175,6 +175,19 @@ module PageContent
       ]
     },
 
+    "contact" => {
+      label: "Contact",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "Get a free quote for your web or mobile app project. Contact AktiveSolutions in Bicol, Philippines." },
+        { key: "header_eyebrow", label: "Header eyebrow", type: :text, default: "Get in touch" },
+        { key: "header_title", label: "Header title", type: :text, default: "Let's talk about your project" },
+        { key: "header_subtitle", label: "Header subtitle", type: :textarea,
+          default: "Tell us what you're building and we'll get back to you within one business day with a free, no-obligation quote." }
+      ],
+      sections: []
+    },
+
     "mobile_development" => {
       label: "Mobile App Development",
       blocks: [

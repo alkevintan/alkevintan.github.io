@@ -16,7 +16,9 @@ class Lead < ApplicationRecord
   validates :name,    presence: true, length: { maximum: 120 }
   validates :email,   presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :message, presence: true, length: { maximum: 5000 }
-  validates :project_type, inclusion: { in: PROJECT_TYPES }, allow_blank: true
+  # Accept any currently-published project-type option (guards against tampering
+  # while letting the admin edit the list). Falls back to the PROJECT_TYPES seed.
+  validates :project_type, inclusion: { in: ->(_lead) { LeadOption.values_for("project_type") } }, allow_blank: true
 
   scope :recent, -> { order(created_at: :desc) }
 

@@ -18,6 +18,11 @@ module ApplicationHelper
     raw(content_text(page, key))
   end
 
+  # Contact-form dropdown option labels (project_type / budget_range / timeline).
+  def lead_options(field)
+    LeadOption.values_for(field)
+  end
+
   # Navigation links for a menu: published DB rows, else the built-in defaults.
   def menu_items(menu)
     rows = MenuItem.published.for_menu(menu).ordered
