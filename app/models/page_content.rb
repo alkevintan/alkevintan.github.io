@@ -18,6 +18,15 @@ module PageContent
   TAG = ItemField.new(name: "title", label: "Tag", meta: false)
 
   PAGES = {
+    "global" => {
+      label: "Global (header/footer)",
+      blocks: [
+        { key: "header_cta", label: "Header CTA button", type: :text, default: "Get a Quote" },
+        { key: "footer_blurb", label: "Footer blurb", type: :textarea,
+          default: "Web &amp; mobile app development for businesses in Bicol and across the Philippines." }
+      ],
+      sections: []
+    },
     "home" => {
       label: "Home",
       blocks: [

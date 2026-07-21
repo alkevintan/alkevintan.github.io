@@ -1,0 +1,41 @@
+<%= form_with model: [:admin, menu_item], class: "space-y-6" do |f| %>
+  <% if menu_item.errors.any? %>
+    <div class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+      <ul class="list-disc pl-5"><% menu_item.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul>
+    </div>
+  <% end %>
+
+  <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
+    <div class="grid gap-5 sm:grid-cols-2">
+      <div>
+        <%= f.label :label, class: admin_label_class %>
+        <%= f.text_field :label, class: admin_input_class %>
+      </div>
+      <div>
+        <%= f.label :url, "URL / path (e.g. /about or https://…)", class: admin_label_class %>
+        <%= f.text_field :url, class: admin_input_class %>
+      </div>
+      <div>
+        <%= f.label :menu, class: admin_label_class %>
+        <%= f.select :menu, MenuItem::MENU_LABELS.map { |k, v| [v, k] }, {}, class: admin_input_class %>
+      </div>
+      <div>
+        <%= f.label :position, "Order (lower shows first)", class: admin_label_class %>
+        <%= f.number_field :position, class: admin_input_class %>
+      </div>
+    </div>
+    <label class="flex items-center gap-2 text-sm font-medium text-slate-700">
+      <%= f.check_box :published, class: "rounded border-slate-300" %> Visible
+    </label>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <%= f.submit(menu_item.persisted? ? "Update link" : "Create link", class: "btn btn-brand cursor-pointer") %>
+    <%= link_to "Cancel", admin_menu_items_path, class: "text-sm text-slate-500" %>
+    <% if menu_item.persisted? %>
+      <%= button_to "Delete", admin_menu_item_path(menu_item), method: :delete,
+            form: { data: { turbo_confirm: "Delete this link?" }, class: "ml-auto" },
+            class: "text-sm font-medium text-red-600 hover:underline" %>
+    <% end %>
+  </div>
+<% end %>

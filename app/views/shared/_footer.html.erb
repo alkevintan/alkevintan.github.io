@@ -7,7 +7,7 @@
           <%= render "shared/logo" %>
         <% end %>
         <p class="mt-4 text-sm leading-relaxed">
-          Web &amp; mobile app development for businesses in Bicol and across the Philippines.
+          <%= content_block("global", "footer_blurb") %>
         </p>
         <% socials = SITE[:social].reject { |_, v| v.blank? } %>
         <% if socials.any? %>
@@ -25,11 +25,9 @@
       <div>
         <h3 class="text-sm font-semibold text-white">Company</h3>
         <ul class="mt-4 space-y-2.5 text-sm">
-          <li><%= link_to "Services", services_path, class: "hover:text-white" %></li>
-          <li><%= link_to "Portfolio", portfolio_path, class: "hover:text-white" %></li>
-          <li><%= link_to "Blog", blog_path, class: "hover:text-white" %></li>
-          <li><%= link_to "About", about_path, class: "hover:text-white" %></li>
-          <li><%= link_to "Contact", contact_path, class: "hover:text-white" %></li>
+          <% menu_items("footer_company").each do |item| %>
+            <li><%= link_to item.label, item.url, class: "hover:text-white" %></li>
+          <% end %>
         </ul>
       </div>
 
@@ -37,9 +35,9 @@
       <div>
         <h3 class="text-sm font-semibold text-white">Services</h3>
         <ul class="mt-4 space-y-2.5 text-sm">
-          <li><%= link_to "Web Development", web_development_path, class: "hover:text-white" %></li>
-          <li><%= link_to "Mobile App Development", mobile_development_path, class: "hover:text-white" %></li>
-          <li><%= link_to "Get a Free Quote", contact_path, class: "hover:text-white" %></li>
+          <% menu_items("footer_services").each do |item| %>
+            <li><%= link_to item.label, item.url, class: "hover:text-white" %></li>
+          <% end %>
         </ul>
       </div>
 

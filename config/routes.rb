@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     resources :case_studies
     resources :testimonials
     resources :faqs
+    resources :menu_items
     resource :site_setting, only: %i[edit update]
 
     # Page-copy editor (ContentBlock + ContentItem, driven by PageContent registry)

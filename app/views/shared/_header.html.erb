@@ -1,12 +1,4 @@
-<%
-  nav_links = [
-    ["Services",  services_path],
-    ["Portfolio", portfolio_path],
-    ["Blog",      blog_path],
-    ["About",     about_path],
-    ["Contact",   contact_path]
-  ]
-%>
+<% nav_links = menu_items("header") %>
 <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur"
         data-controller="nav">
   <nav class="site-container flex h-16 items-center justify-between" aria-label="Main">
@@ -16,11 +8,11 @@
 
     <%# Desktop nav %>
     <div class="hidden items-center gap-8 md:flex">
-      <% nav_links.each do |label, path| %>
-        <%= link_to label, path,
-              class: "text-sm font-medium text-slate-600 transition hover:text-brand-600 #{'text-brand-600' if current_page?(path)}" %>
+      <% nav_links.each do |item| %>
+        <%= link_to item.label, item.url,
+              class: "text-sm font-medium text-slate-600 transition hover:text-brand-600 #{'text-brand-600' if current_page?(item.url)}" %>
       <% end %>
-      <%= link_to "Get a Quote", contact_path, class: "btn btn-brand px-5 py-2.5" %>
+      <%= link_to content_block("global", "header_cta"), contact_path, class: "btn btn-brand px-5 py-2.5" %>
     </div>
 
     <%# Mobile toggle %>
@@ -40,11 +32,11 @@
   <%# Mobile menu %>
   <div id="mobile-menu" data-nav-target="menu" class="hidden border-t border-slate-200 md:hidden">
     <div class="site-container flex flex-col gap-1 py-4">
-      <% nav_links.each do |label, path| %>
-        <%= link_to label, path, data: { action: "nav#close" },
+      <% nav_links.each do |item| %>
+        <%= link_to item.label, item.url, data: { action: "nav#close" },
               class: "rounded-lg px-3 py-2.5 text-base font-medium text-slate-700 hover:bg-slate-50" %>
       <% end %>
-      <%= link_to "Get a Quote", contact_path, class: "btn btn-brand mt-2", data: { action: "nav#close" } %>
+      <%= link_to content_block("global", "header_cta"), contact_path, class: "btn btn-brand mt-2", data: { action: "nav#close" } %>
     </div>
   </div>
 </header>

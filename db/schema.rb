@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_21_120004) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_21_120005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -123,6 +123,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_21_120004) do
     t.string "utm_source"
     t.index ["created_at"], name: "index_leads_on_created_at"
     t.index ["status"], name: "index_leads_on_status"
+  end
+
+  create_table "menu_items", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "label", null: false
+    t.string "menu", null: false
+    t.integer "position", default: 0, null: false
+    t.boolean "published", default: true, null: false
+    t.datetime "updated_at", null: false
+    t.string "url", null: false
+    t.index ["menu", "position"], name: "index_menu_items_on_menu_and_position"
   end
 
   create_table "posts", force: :cascade do |t|

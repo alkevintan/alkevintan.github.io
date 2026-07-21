@@ -2,7 +2,9 @@
 
 <div class="mb-5 flex items-center justify-between">
   <%= link_to "&larr; All pages".html_safe, admin_content_index_path, class: "text-sm text-slate-500" %>
-  <%= link_to "View page", "/#{@page == 'home' ? '' : @page.tr('_', '-')}", target: "_blank", class: "text-sm text-slate-500" %>
+  <% unless @page == "global" %>
+    <%= link_to "View page", "/#{@page == 'home' ? '' : @page.tr('_', '-')}", target: "_blank", class: "text-sm text-slate-500" %>
+  <% end %>
 </div>
 
 <%= form_with url: admin_content_path(@page), method: :patch, class: "space-y-6" do %>

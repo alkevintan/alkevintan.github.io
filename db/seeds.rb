@@ -65,6 +65,19 @@ end
 puts "Content blocks: #{ContentBlock.count}, items: #{ContentItem.count}"
 
 # ---------------------------------------------------------------------------
+# Menu links (header + footer columns), seeded from the built-in defaults
+# ---------------------------------------------------------------------------
+MenuItem::DEFAULTS.each do |menu, links|
+  links.each_with_index do |(label, url), i|
+    item = MenuItem.find_or_initialize_by(menu: menu, label: label, url: url)
+    item.position = i
+    item.published = true if item.new_record?
+    item.save!
+  end
+end
+puts "Menu items: #{MenuItem.count}"
+
+# ---------------------------------------------------------------------------
 # FAQs (seeded from the built-in defaults, then editable in the admin)
 # ---------------------------------------------------------------------------
 Faq::DEFAULTS.each do |page, pairs|

@@ -18,6 +18,14 @@ module ApplicationHelper
     raw(content_text(page, key))
   end
 
+  # Navigation links for a menu: published DB rows, else the built-in defaults.
+  def menu_items(menu)
+    rows = MenuItem.published.for_menu(menu).ordered
+    return rows.to_a if rows.any?
+
+    MenuItem::DEFAULTS.fetch(menu, []).map { |label, url| MenuItem.new(menu: menu, label: label, url: url) }
+  end
+
   # Editable repeating section. Returns published DB rows, else registry
   # defaults — both expose .title/.body/.meta so views iterate uniformly.
   def content_items(page, section)
