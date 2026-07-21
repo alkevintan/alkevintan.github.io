@@ -70,17 +70,6 @@
   </div>
 </section>
 
-<%= render "shared/faq", faqs: [
-  ["How much does a website cost in the Philippines?",
-   "It depends on scope. Business websites typically range from ₱30,000–₱120,000, while e-commerce and custom web apps are quoted per project. <a href='/blog/website-cost-philippines-2026'>Read our full pricing guide</a> or <a href='/contact'>get a free quote</a>."],
-  ["How long does it take to build a website?",
-   "A typical business website takes 3–6 weeks from kickoff to launch, depending on the number of pages and features."],
-  ["Will my website show up on Google?",
-   "Yes. We build every site with technical SEO, fast load times and clean structure so it can rank — and we can help with ongoing SEO content too."],
-  ["Do you work with businesses outside Bicol?",
-   "Absolutely. We're based in Bicol but work with clients across the Philippines and communicate online throughout the project."],
-  ["Can you redesign my existing website?",
-   "Yes. We can modernize a slow or outdated site while preserving your content and search rankings."]
-] %>
+<%= render "shared/faq", faqs: faqs_for("web_development") %>
 
 <%= render "shared/cta", title: "Ready to build your website?" %>

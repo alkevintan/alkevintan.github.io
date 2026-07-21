@@ -66,17 +66,6 @@
   </div>
 </section>
 
-<%= render "shared/faq", faqs: [
-  ["Should I build a mobile app or a website first?",
-   "It depends on your goals. Many businesses start with a website and add an app once there's proven demand. <a href='/blog/mobile-app-vs-website-philippines'>Read our guide</a> to decide."],
-  ["Do you build for both iOS and Android?",
-   "Yes. We usually build cross-platform apps so you reach both iOS and Android users from a single codebase, which saves time and cost."],
-  ["How much does a mobile app cost in the Philippines?",
-   "App projects are quoted based on features and complexity. Tell us your idea and we'll give you a fixed-scope estimate for free."],
-  ["Will you help publish the app to the stores?",
-   "Yes. We handle the builds, store listings and submission to the Apple App Store and Google Play."],
-  ["Do you provide support after launch?",
-   "Yes. We offer maintenance and support so your app stays updated and reliable as your business grows."]
-] %>
+<%= render "shared/faq", faqs: faqs_for("mobile_development") %>
 
 <%= render "shared/cta", title: "Have an app idea? Let's build it." %>

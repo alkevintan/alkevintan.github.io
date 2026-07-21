@@ -43,6 +43,20 @@ else
 end
 
 # ---------------------------------------------------------------------------
+# FAQs (seeded from the built-in defaults, then editable in the admin)
+# ---------------------------------------------------------------------------
+Faq::DEFAULTS.each do |page, pairs|
+  pairs.each_with_index do |(question, answer), i|
+    faq = Faq.find_or_initialize_by(page: page, question: question)
+    faq.answer = answer
+    faq.position = i
+    faq.published = true if faq.new_record?
+    faq.save!
+  end
+end
+puts "FAQs: #{Faq.count}"
+
+# ---------------------------------------------------------------------------
 # Testimonials
 # ---------------------------------------------------------------------------
 [

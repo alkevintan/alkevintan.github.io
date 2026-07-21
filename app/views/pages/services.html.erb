@@ -45,13 +45,6 @@
   </div>
 </section>
 
-<%= render "shared/faq", faqs: [
-  ["Where are you based, and do you work remotely?",
-   "We're based in the Bicol Region (Naga / Legazpi area) and work with clients across the Philippines, communicating online throughout the project."],
-  ["How do your quotes work?",
-   "We give fixed-scope quotes after a short discovery chat, so you know the cost up front with no surprises. <a href='/contact'>Request a free quote</a>."],
-  ["What size businesses do you work with?",
-   "Mostly startups and small-to-medium businesses (SMEs), but we're happy to help organizations of any size."]
-] %>
+<%= render "shared/faq", faqs: faqs_for("services") %>
 
 <%= render "shared/cta" %>

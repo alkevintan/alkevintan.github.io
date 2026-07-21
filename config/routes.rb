@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :posts
     resources :case_studies
     resources :testimonials
+    resources :faqs
     resource :site_setting, only: %i[edit update]
   end
 

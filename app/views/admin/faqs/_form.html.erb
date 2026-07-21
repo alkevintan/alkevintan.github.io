@@ -1,0 +1,48 @@
+<%= form_with model: [:admin, faq], class: "space-y-6" do |f| %>
+  <% if faq.errors.any? %>
+    <div class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+      <ul class="list-disc pl-5"><% faq.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul>
+    </div>
+  <% end %>
+
+  <div class="grid gap-6 lg:grid-cols-3">
+    <div class="lg:col-span-2 space-y-6">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
+        <div>
+          <%= f.label :question, class: admin_label_class %>
+          <%= f.text_field :question, class: admin_input_class %>
+        </div>
+        <div>
+          <%= f.label :answer, "Answer (simple HTML links allowed)", class: admin_label_class %>
+          <%= f.text_area :answer, rows: 5, class: admin_input_class %>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
+        <div>
+          <%= f.label :page, class: admin_label_class %>
+          <%= f.select :page, Faq::PAGE_LABELS.map { |k, v| [v, k] }, {}, class: admin_input_class %>
+        </div>
+        <div>
+          <%= f.label :position, "Order (lower shows first)", class: admin_label_class %>
+          <%= f.number_field :position, class: admin_input_class %>
+        </div>
+        <label class="flex items-center gap-2 text-sm font-medium text-slate-700">
+          <%= f.check_box :published, class: "rounded border-slate-300" %> Published
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <%= f.submit(faq.persisted? ? "Update FAQ" : "Create FAQ", class: "btn btn-brand cursor-pointer") %>
+    <%= link_to "Cancel", admin_faqs_path, class: "text-sm text-slate-500" %>
+    <% if faq.persisted? %>
+      <%= button_to "Delete", admin_faq_path(faq), method: :delete,
+            form: { data: { turbo_confirm: "Delete this FAQ?" }, class: "ml-auto" },
+            class: "text-sm font-medium text-red-600 hover:underline" %>
+    <% end %>
+  </div>
+<% end %>
