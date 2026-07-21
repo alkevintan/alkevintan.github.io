@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_18_145037) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_21_120001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -117,6 +117,35 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_18_145037) do
     t.string "user_agent"
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "site_settings", force: :cascade do |t|
+    t.string "address_area"
+    t.string "address_country"
+    t.string "address_country_name"
+    t.string "address_locality"
+    t.string "address_region"
+    t.datetime "created_at", null: false
+    t.string "default_og_image"
+    t.text "description"
+    t.string "domain"
+    t.string "email"
+    t.string "facebook_url"
+    t.string "ga4_measurement_id"
+    t.string "github_url"
+    t.string "google_site_verification"
+    t.string "instagram_url"
+    t.string "legal_name"
+    t.string "linkedin_url"
+    t.string "locale"
+    t.string "name"
+    t.string "phone"
+    t.string "phone_link"
+    t.text "service_areas"
+    t.string "tagline"
+    t.datetime "updated_at", null: false
+    t.string "url"
+    t.string "whatsapp"
   end
 
   create_table "testimonials", force: :cascade do |t|

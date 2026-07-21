@@ -19,6 +19,30 @@ else
 end
 
 # ---------------------------------------------------------------------------
+# Site settings (single row, pre-filled from the built-in defaults)
+# ---------------------------------------------------------------------------
+if SiteSetting.none?
+  d = SITE_DEFAULTS
+  SiteSetting.create!(
+    name: d[:name], legal_name: d[:legal_name], tagline: d[:tagline],
+    description: d[:description], domain: d[:domain], url: d[:url], locale: d[:locale],
+    email: d[:email], phone: d[:phone], phone_link: d[:phone_link], whatsapp: d[:whatsapp],
+    address_locality: d[:address][:locality], address_region: d[:address][:region],
+    address_area: d[:address][:area], address_country: d[:address][:country],
+    address_country_name: d[:address][:country_name],
+    service_areas: d[:service_areas].join("\n"),
+    facebook_url: d[:social][:facebook], linkedin_url: d[:social][:linkedin],
+    instagram_url: d[:social][:instagram], github_url: d[:social][:github],
+    ga4_measurement_id: d[:ga4_measurement_id],
+    google_site_verification: d[:google_site_verification],
+    default_og_image: d[:default_og_image]
+  )
+  puts "Created site settings row"
+else
+  puts "Site settings already present"
+end
+
+# ---------------------------------------------------------------------------
 # Testimonials
 # ---------------------------------------------------------------------------
 [

@@ -25,7 +25,8 @@
                ["Leads", admin_leads_path, "M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1a4 4 0 100-8 4 4 0 000 8z"],
                ["Blog Posts", admin_posts_path, "M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5M18 3l3 3-9 9H9v-3l9-9z"],
                ["Case Studies", admin_case_studies_path, "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-14L4 7m8 4v10M4 7v10l8 4"],
-               ["Testimonials", admin_testimonials_path, "M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"]
+               ["Testimonials", admin_testimonials_path, "M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"],
+               ["Site Settings", edit_admin_site_setting_path, "M10.3 3.3a1 1 0 011.4 0l.6.6a1 1 0 00.9.3l.8-.1a1 1 0 011.1.7l.3.8a1 1 0 00.6.6l.8.3a1 1 0 01.7 1.1l-.1.8a1 1 0 00.3.9l.6.6a1 1 0 010 1.4l-.6.6a1 1 0 00-.3.9l.1.8a1 1 0 01-.7 1.1l-.8.3a1 1 0 00-.6.6l-.3.8a1 1 0 01-1.1.7l-.8-.1a1 1 0 00-.9.3l-.6.6a1 1 0 01-1.4 0l-.6-.6a1 1 0 00-.9-.3l-.8.1a1 1 0 01-1.1-.7l-.3-.8a1 1 0 00-.6-.6l-.8-.3a1 1 0 01-.7-1.1l.1-.8a1 1 0 00-.3-.9l-.6-.6a1 1 0 010-1.4l.6-.6a1 1 0 00.3-.9l-.1-.8a1 1 0 01.7-1.1l.8-.3a1 1 0 00.6-.6l.3-.8a1 1 0 011.1-.7l.8.1a1 1 0 00.9-.3l.6-.6zM12 15a3 3 0 100-6 3 3 0 000 6z"]
              ] %>
           <% admin_nav.each do |label, path, icon| %>
             <% active = request.path == path || (path != admin_root_path && request.path.start_with?(path)) %>

@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :posts
     resources :case_studies
     resources :testimonials
+    resource :site_setting, only: %i[edit update]
   end
 
   # SEO machine-readable files

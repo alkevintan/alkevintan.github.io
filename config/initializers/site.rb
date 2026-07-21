@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-# Central source of truth for company / brand / SEO details.
-# Referenced by the layout, meta-tag helper, JSON-LD, header and footer.
+# Fallback company / brand / SEO details.
 #
-# NOTE: values marked TODO are placeholders — replace with real business details
-# (phone, address, socials, Search Console token) before launch.
-SITE = {
+# These are the built-in defaults. At runtime the site reads from the editable
+# `SiteSetting` row (Admin → Site Settings); any field left blank there falls
+# back to the matching value here, so the site renders correctly even with an
+# empty database. Referenced through the drop-in `SITE[:key]` interface below.
+SITE_DEFAULTS = {
   name: "AktiveSolutions",
   legal_name: "AktiveSolutions",
   tagline: "Web & Mobile App Development in the Philippines",
@@ -50,3 +51,49 @@ SITE = {
   # Default Open Graph image (relative to /public or an asset path).
   default_og_image: "og-default.png"
 }.freeze
+
+# Drop-in replacement for the old frozen SITE hash. `SITE[:key]` now resolves
+# through the editable SiteSetting row (with SITE_DEFAULTS as the fallback),
+# so every existing `SITE[:key]` reference keeps working unchanged.
+class SiteConfig
+  def [](key)
+    SiteSetting.current.to_site_hash.fetch(key) { SITE_DEFAULTS[key] }
+  # Stay resilient during boot / asset precompile / migrations, when the DB or
+  # the site_settings table may not exist yet — fall back to the static default.
+  rescue StandardError
+    SITE_DEFAULTS[key]
+  end
+
+  def fetch(key, *default)
+    value = self[key]
+    return value unless value.nil?
+
+    default.empty? ? (block_given? ? yield(key) : SITE_DEFAULTS.fetch(key)) : default.first
+  end
+
+  def dig(key, *rest)
+    value = self[key]
+    rest.empty? ? value : value&.dig(*rest)
+  end
+
+  def to_h
+    SITE_DEFAULTS.merge(SiteSetting.current.to_site_hash)
+  rescue StandardError
+    SITE_DEFAULTS
+  end
+
+  # Forward any other Hash read method (keys, values, each, key?, …) to the
+  # resolved hash so SITE stays a drop-in for the old frozen constant.
+  def respond_to_missing?(name, include_private = false)
+    to_h.respond_to?(name, include_private) || super
+  end
+
+  def method_missing(name, *args, &block)
+    hash = to_h
+    return hash.public_send(name, *args, &block) if hash.respond_to?(name)
+
+    super
+  end
+end
+
+SITE = SiteConfig.new

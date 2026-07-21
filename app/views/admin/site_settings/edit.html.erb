@@ -1,0 +1,159 @@
+<% content_for :title, "Site Settings" %>
+
+<%= form_with model: @site_setting, url: admin_site_setting_path, method: :patch, class: "space-y-6" do |f| %>
+  <% if @site_setting.errors.any? %>
+    <div class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+      <ul class="list-disc pl-5"><% @site_setting.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul>
+    </div>
+  <% end %>
+
+  <p class="text-sm text-slate-500">Leave a field blank to use the built-in default shown as its placeholder.</p>
+
+  <div class="grid gap-6 lg:grid-cols-3">
+    <div class="lg:col-span-2 space-y-6">
+      <%# Brand %>
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
+        <h3 class="text-sm font-semibold text-slate-900">Brand</h3>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <%= f.label :name, "Name", class: admin_label_class %>
+            <%= f.text_field :name, placeholder: SITE_DEFAULTS[:name], class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :legal_name, "Legal name", class: admin_label_class %>
+            <%= f.text_field :legal_name, placeholder: SITE_DEFAULTS[:legal_name], class: admin_input_class %>
+          </div>
+        </div>
+        <div>
+          <%= f.label :tagline, "Tagline", class: admin_label_class %>
+          <%= f.text_field :tagline, placeholder: SITE_DEFAULTS[:tagline], class: admin_input_class %>
+        </div>
+        <div>
+          <%= f.label :description, "Default meta description", class: admin_label_class %>
+          <%= f.text_area :description, rows: 3, placeholder: SITE_DEFAULTS[:description], class: admin_input_class %>
+        </div>
+        <div class="grid gap-5 sm:grid-cols-3">
+          <div>
+            <%= f.label :domain, "Domain", class: admin_label_class %>
+            <%= f.text_field :domain, placeholder: SITE_DEFAULTS[:domain], class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :url, "Base URL", class: admin_label_class %>
+            <%= f.text_field :url, placeholder: SITE_DEFAULTS[:url], class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :locale, "Locale", class: admin_label_class %>
+            <%= f.text_field :locale, placeholder: SITE_DEFAULTS[:locale], class: admin_input_class %>
+          </div>
+        </div>
+      </div>
+
+      <%# Contact / NAP %>
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
+        <h3 class="text-sm font-semibold text-slate-900">Contact &amp; address</h3>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <%= f.label :email, "Email", class: admin_label_class %>
+            <%= f.text_field :email, placeholder: SITE_DEFAULTS[:email], class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :phone, "Phone (display)", class: admin_label_class %>
+            <%= f.text_field :phone, placeholder: SITE_DEFAULTS[:phone], class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :phone_link, "Phone link (E.164, no spaces)", class: admin_label_class %>
+            <%= f.text_field :phone_link, placeholder: SITE_DEFAULTS[:phone_link], class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :whatsapp, "WhatsApp (digits only, blank = hidden)", class: admin_label_class %>
+            <%= f.text_field :whatsapp, placeholder: "639XXXXXXXXX", class: admin_input_class %>
+          </div>
+        </div>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <%= f.label :address_locality, "City / locality", class: admin_label_class %>
+            <%= f.text_field :address_locality, placeholder: SITE_DEFAULTS[:address][:locality], class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :address_region, "Region", class: admin_label_class %>
+            <%= f.text_field :address_region, placeholder: SITE_DEFAULTS[:address][:region], class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :address_area, "Area", class: admin_label_class %>
+            <%= f.text_field :address_area, placeholder: SITE_DEFAULTS[:address][:area], class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :address_country, "Country code", class: admin_label_class %>
+            <%= f.text_field :address_country, placeholder: SITE_DEFAULTS[:address][:country], class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :address_country_name, "Country name", class: admin_label_class %>
+            <%= f.text_field :address_country_name, placeholder: SITE_DEFAULTS[:address][:country_name], class: admin_input_class %>
+          </div>
+        </div>
+        <div>
+          <%= f.label :service_areas, "Service areas (one per line)", class: admin_label_class %>
+          <%= f.text_area :service_areas, rows: 4, placeholder: SITE_DEFAULTS[:service_areas].join("\n"), class: admin_input_class %>
+        </div>
+      </div>
+
+      <%# Social %>
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
+        <h3 class="text-sm font-semibold text-slate-900">Social profiles</h3>
+        <p class="text-xs text-slate-500">Full profile URLs. Blank ones are hidden in the footer and JSON-LD.</p>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <%= f.label :facebook_url, "Facebook", class: admin_label_class %>
+            <%= f.text_field :facebook_url, placeholder: "https://facebook.com/…", class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :linkedin_url, "LinkedIn", class: admin_label_class %>
+            <%= f.text_field :linkedin_url, placeholder: "https://linkedin.com/company/…", class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :instagram_url, "Instagram", class: admin_label_class %>
+            <%= f.text_field :instagram_url, placeholder: "https://instagram.com/…", class: admin_input_class %>
+          </div>
+          <div>
+            <%= f.label :github_url, "GitHub", class: admin_label_class %>
+            <%= f.text_field :github_url, placeholder: "https://github.com/…", class: admin_input_class %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <%# Analytics %>
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
+        <h3 class="text-sm font-semibold text-slate-900">Analytics &amp; verification</h3>
+        <div>
+          <%= f.label :ga4_measurement_id, "GA4 measurement ID", class: admin_label_class %>
+          <%= f.text_field :ga4_measurement_id, placeholder: "G-XXXXXXXXXX", class: admin_input_class %>
+          <p class="mt-1 text-xs text-slate-500">Blank disables the GA4 tag.</p>
+        </div>
+        <div>
+          <%= f.label :google_site_verification, "Search Console token", class: admin_label_class %>
+          <%= f.text_field :google_site_verification, class: admin_input_class %>
+        </div>
+      </div>
+
+      <%# OG image %>
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-4">
+        <h3 class="text-sm font-semibold text-slate-900">Default share image</h3>
+        <% if @site_setting.og_image.attached? %>
+          <%= image_tag @site_setting.og_image.variant(resize_to_limit: [400, 225]), class: "rounded-lg" %>
+        <% end %>
+        <%= f.file_field :og_image, accept: "image/*", class: "block w-full text-sm text-slate-600" %>
+        <div>
+          <%= f.label :default_og_image, "…or filename in /public", class: admin_label_class %>
+          <%= f.text_field :default_og_image, placeholder: SITE_DEFAULTS[:default_og_image], class: admin_input_class %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <%= f.submit "Save settings", class: "btn btn-brand cursor-pointer" %>
+    <%= link_to "View site", root_path, target: "_blank", class: "text-sm text-slate-500" %>
+  </div>
+<% end %>
