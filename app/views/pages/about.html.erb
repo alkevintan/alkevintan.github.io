@@ -1,30 +1,20 @@
-<% set_meta title: "About Us",
-     description: "AktiveSolutions is a web and mobile app development studio based in Bicol, Philippines, helping startups and SMEs build software that grows their business." %>
+<% set_meta title: "About Us", description: content_text("about", "meta_description") %>
 
-<%= render "shared/page_header", eyebrow: "Who we are",
-      title: "A software studio built for Philippine businesses",
-      subtitle: "We're AktiveSolutions — a web and mobile app development team based in Bicol, working with clients across the Philippines." %>
+<%= render "shared/page_header", eyebrow: content_block("about", "header_eyebrow"),
+      title: content_block("about", "header_title"),
+      subtitle: content_block("about", "header_subtitle") %>
 
 <section class="site-container py-16">
   <div class="prose-content max-w-3xl">
-    <h2>Our story</h2>
-    <p>AktiveSolutions was founded on a simple belief: world-class software shouldn't only
-       be available to big companies in Manila. Businesses everywhere — from Naga to
-       Legazpi to the rest of the country — deserve fast, well-built websites and apps that
-       actually help them grow.</p>
-    <p>We work directly with our clients, no middlemen and no outsourcing surprises. That
-       means clearer communication, better results, and software you can rely on.</p>
+    <h2><%= content_block("about", "story_heading") %></h2>
+    <%= content_block("about", "story_body") %>
   </div>
 
   <div class="mt-14 grid gap-8 md:grid-cols-3">
-    <% [
-      ["Quality first", "We write clean, maintainable code and sweat the details — performance, security and accessibility included."],
-      ["Local, but nationwide", "Based in Bicol and proud of it. We serve clients across the Philippines and communicate online end-to-end."],
-      ["Transparent & fair", "Fixed-scope quotes and honest advice. You'll always know what you're paying for and why."]
-    ].each do |title, body| %>
+    <% content_items("about", "values").each do |value| %>
       <div class="card">
-        <h3 class="text-lg font-semibold text-slate-900"><%= title %></h3>
-        <p class="mt-2 text-sm text-slate-600"><%= body %></p>
+        <h3 class="text-lg font-semibold text-slate-900"><%= raw value.title %></h3>
+        <p class="mt-2 text-sm text-slate-600"><%= raw value.body %></p>
       </div>
     <% end %>
   </div>
@@ -32,14 +22,10 @@
 
 <section class="bg-slate-950 py-16 text-white">
   <div class="site-container grid gap-8 text-center sm:grid-cols-3">
-    <% [
-      ["Web + Mobile", "Full-stack product development under one roof"],
-      ["Bicol-based", "Serving Naga, Legazpi & the whole Philippines"],
-      ["SEO-first", "Every build is made to be found on Google"]
-    ].each do |big, small| %>
+    <% content_items("about", "stats").each do |stat| %>
       <div>
-        <p class="font-display text-2xl font-bold text-white"><%= big %></p>
-        <p class="mt-1 text-sm text-slate-400"><%= small %></p>
+        <p class="font-display text-2xl font-bold text-white"><%= raw stat.title %></p>
+        <p class="mt-1 text-sm text-slate-400"><%= raw stat.body %></p>
       </div>
     <% end %>
   </div>

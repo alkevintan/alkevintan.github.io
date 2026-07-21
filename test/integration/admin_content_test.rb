@@ -66,4 +66,23 @@ class AdminContentTest < ActionDispatch::IntegrationTest
     get edit_admin_content_path("nope")
     assert_response :not_found
   end
+
+  test "every registered page renders and is editable" do
+    PageContent::PAGES.each_key do |page|
+      get edit_admin_content_path(page)
+      assert_response :success, "editor for #{page} should render"
+    end
+  end
+
+  test "about and web pages reflect content overrides" do
+    ContentBlock.create!(page: "about", key: "story_heading", content: "Our journey")
+    ContentItem.create!(page: "web_development", section: "tech_tags", title: "Elixir", position: 0)
+
+    get about_path
+    assert_match "Our journey", @response.body
+
+    get web_development_path
+    assert_match "Elixir", @response.body
+    assert_no_match "Hotwire", @response.body # a default tag, replaced by the DB row
+  end
 end

@@ -1,33 +1,21 @@
-<% set_meta title: "Mobile App Development Philippines",
-     description: "iOS and Android mobile app development in the Philippines. Native and cross-platform apps built by AktiveSolutions in Bicol, serving clients nationwide. Get a free quote." %>
+<% set_meta title: "Mobile App Development Philippines", description: content_text("mobile_development", "meta_description") %>
 
-<%= render "shared/page_header", eyebrow: "Services",
-      title: "Mobile App Development",
-      subtitle: "Native and cross-platform iOS & Android apps — from idea to the App Store and Google Play." %>
+<%= render "shared/page_header", eyebrow: content_block("mobile_development", "header_eyebrow"),
+      title: content_block("mobile_development", "header_title"),
+      subtitle: content_block("mobile_development", "header_subtitle") %>
 
 <section class="site-container py-16">
   <div class="prose-content max-w-3xl">
-    <p>Your customers live on their phones. A well-built mobile app puts your business in
-       their pocket — with fast performance, offline access, and push notifications that
-       bring them back.</p>
-    <p>We take your idea from concept to launch, building reliable apps that people actually
-       enjoy using, backed by a solid, scalable server.</p>
+    <%= content_block("mobile_development", "intro") %>
   </div>
 
   <div class="mt-14">
-    <h2 class="text-2xl">What we build</h2>
+    <h2 class="text-2xl"><%= content_block("mobile_development", "what_heading") %></h2>
     <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <% [
-        ["Cross-platform apps", "One codebase for both iOS and Android — faster to build and easier to maintain."],
-        ["Native apps", "Platform-specific apps when you need maximum performance and device features."],
-        ["Booking & ordering apps", "Let customers book, order and pay from their phone, 24/7."],
-        ["Business & internal apps", "Tools for your team — inventory, field work, reporting and more."],
-        ["App backends & APIs", "Secure, scalable servers and APIs that power your app."],
-        ["App Store launch", "We handle builds, store listings and the submission process."]
-      ].each do |title, body| %>
+      <% content_items("mobile_development", "what_we_build").each do |item| %>
         <div class="card">
-          <h3 class="font-semibold text-slate-900"><%= title %></h3>
-          <p class="mt-2 text-sm text-slate-600"><%= body %></p>
+          <h3 class="font-semibold text-slate-900"><%= raw item.title %></h3>
+          <p class="mt-2 text-sm text-slate-600"><%= raw item.body %></p>
         </div>
       <% end %>
     </div>
@@ -36,18 +24,13 @@
 
 <section class="bg-slate-50 py-16">
   <div class="site-container">
-    <h2 class="text-2xl">How we work</h2>
+    <h2 class="text-2xl"><%= content_block("mobile_development", "process_heading") %></h2>
     <ol class="mt-8 grid gap-8 md:grid-cols-4">
-      <% [
-        ["01", "Discover", "We define your app's core features and give you a clear, fixed-scope quote."],
-        ["02", "Design", "We design intuitive screens and flows your users will love."],
-        ["03", "Build & test", "We develop and rigorously test on real devices."],
-        ["04", "Launch & support", "We publish to the App Store and Google Play, then support your app."]
-      ].each do |num, title, body| %>
+      <% content_items("mobile_development", "process").each_with_index do |step, i| %>
         <li>
-          <span class="font-display text-2xl font-bold text-brand-500"><%= num %></span>
-          <h3 class="mt-2 font-semibold text-slate-900"><%= title %></h3>
-          <p class="mt-1 text-sm text-slate-600"><%= body %></p>
+          <span class="font-display text-2xl font-bold text-brand-500"><%= raw step.meta["number"].presence || format("%02d", i + 1) %></span>
+          <h3 class="mt-2 font-semibold text-slate-900"><%= raw step.title %></h3>
+          <p class="mt-1 text-sm text-slate-600"><%= raw step.body %></p>
         </li>
       <% end %>
     </ol>
@@ -56,11 +39,11 @@
 
 <section class="site-container py-16">
   <div class="max-w-3xl">
-    <h2 class="text-2xl">Technology we use</h2>
-    <p class="mt-3 text-slate-600">We choose the right tools for your app's needs and budget.</p>
+    <h2 class="text-2xl"><%= content_block("mobile_development", "tech_heading") %></h2>
+    <p class="mt-3 text-slate-600"><%= content_block("mobile_development", "tech_body") %></p>
     <div class="mt-6 flex flex-wrap gap-2">
-      <% ["React Native", "Swift (iOS)", "Kotlin (Android)", "Ruby on Rails API", "PostgreSQL", "Firebase", "Push notifications"].each do |t| %>
-        <span class="rounded-full bg-slate-100 px-4 py-1.5 text-sm font-medium text-slate-700"><%= t %></span>
+      <% content_items("mobile_development", "tech_tags").each do |tag| %>
+        <span class="rounded-full bg-slate-100 px-4 py-1.5 text-sm font-medium text-slate-700"><%= raw tag.title %></span>
       <% end %>
     </div>
   </div>
@@ -68,4 +51,4 @@
 
 <%= render "shared/faq", faqs: faqs_for("mobile_development") %>
 
-<%= render "shared/cta", title: "Have an app idea? Let's build it." %>
+<%= render "shared/cta", title: content_block("mobile_development", "cta_title") %>

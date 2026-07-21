@@ -14,6 +14,8 @@ module PageContent
   TITLE = ItemField.new(name: "title", label: "Title", meta: false)
   BODY  = ItemField.new(name: "body",  label: "Description", meta: false)
   def self.link_field = ItemField.new(name: "path", label: "Link (URL path)", meta: true)
+  def self.number_field = ItemField.new(name: "number", label: "Step number", meta: true)
+  TAG = ItemField.new(name: "title", label: "Tag", meta: false)
 
   PAGES = {
     "home" => {
@@ -60,6 +62,149 @@ module PageContent
             { title: "Based in Bicol, serving the Philippines", body: "Local time zone, local context, easy to reach." },
             { title: "Built for performance &amp; SEO", body: "Fast, mobile-first, and structured to rank on Google." },
             { title: "Transparent, fixed-scope quotes", body: "Know what you're paying before we start." }
+          ] }
+      ]
+    },
+
+    "about" => {
+      label: "About",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "AktiveSolutions is a web and mobile app development studio based in Bicol, Philippines, helping startups and SMEs build software that grows their business." },
+        { key: "header_eyebrow", label: "Header eyebrow", type: :text, default: "Who we are" },
+        { key: "header_title", label: "Header title", type: :text, default: "A software studio built for Philippine businesses" },
+        { key: "header_subtitle", label: "Header subtitle", type: :textarea,
+          default: "We're AktiveSolutions — a web and mobile app development team based in Bicol, working with clients across the Philippines." },
+        { key: "story_heading", label: "Story heading", type: :text, default: "Our story" },
+        { key: "story_body", label: "Story paragraphs (HTML)", type: :textarea,
+          default: "<p>AktiveSolutions was founded on a simple belief: world-class software shouldn't only be available to big companies in Manila. Businesses everywhere — from Naga to Legazpi to the rest of the country — deserve fast, well-built websites and apps that actually help them grow.</p><p>We work directly with our clients, no middlemen and no outsourcing surprises. That means clearer communication, better results, and software you can rely on.</p>" }
+      ],
+      sections: [
+        { key: "values", label: "Value cards", fields: [TITLE, BODY],
+          default: [
+            { title: "Quality first", body: "We write clean, maintainable code and sweat the details — performance, security and accessibility included." },
+            { title: "Local, but nationwide", body: "Based in Bicol and proud of it. We serve clients across the Philippines and communicate online end-to-end." },
+            { title: "Transparent &amp; fair", body: "Fixed-scope quotes and honest advice. You'll always know what you're paying for and why." }
+          ] },
+        { key: "stats", label: "Stat band", fields: [TITLE, BODY],
+          default: [
+            { title: "Web + Mobile", body: "Full-stack product development under one roof" },
+            { title: "Bicol-based", body: "Serving Naga, Legazpi &amp; the whole Philippines" },
+            { title: "SEO-first", body: "Every build is made to be found on Google" }
+          ] }
+      ]
+    },
+
+    "services" => {
+      label: "Services",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "Web development, web apps, mobile apps and SEO for Philippine businesses. See how AktiveSolutions can help you build and grow — from Bicol, nationwide." },
+        { key: "header_eyebrow", label: "Header eyebrow", type: :text, default: "What we do" },
+        { key: "header_title", label: "Header title", type: :text, default: "Services" },
+        { key: "header_subtitle", label: "Header subtitle", type: :textarea,
+          default: "End-to-end design, development and growth for web and mobile — built for the Philippine market." },
+        { key: "web_title", label: "Web card title", type: :text, default: "Web Development" },
+        { key: "web_body", label: "Web card text", type: :textarea,
+          default: "Marketing sites, e-commerce, dashboards and custom web apps — fast, secure and SEO-ready." },
+        { key: "mobile_title", label: "Mobile card title", type: :text, default: "Mobile App Development" },
+        { key: "mobile_body", label: "Mobile card text", type: :textarea,
+          default: "Native and cross-platform iOS &amp; Android apps, from idea to the App Store and Google Play." },
+        { key: "extras_heading", label: "Extras heading", type: :text, default: "We also help with" }
+      ],
+      sections: [
+        { key: "extras", label: "Also help with", fields: [TITLE, BODY],
+          default: [
+            { title: "SEO &amp; Growth", body: "Rank on Google and turn traffic into leads." },
+            { title: "E-commerce", body: "Sell online with secure payments and shipping." },
+            { title: "UI/UX Design", body: "Clean, modern, mobile-first interfaces." },
+            { title: "Maintenance &amp; Support", body: "Keep your site or app fast, secure and up to date." }
+          ] }
+      ]
+    },
+
+    "web_development" => {
+      label: "Web Development",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "Custom web development in the Philippines — fast, SEO-ready websites and web apps. Serving Bicol (Naga, Legazpi) and businesses nationwide. Get a free quote." },
+        { key: "header_eyebrow", label: "Header eyebrow", type: :text, default: "Services" },
+        { key: "header_title", label: "Header title", type: :text, default: "Web Development" },
+        { key: "header_subtitle", label: "Header subtitle", type: :textarea,
+          default: "Fast, secure, SEO-ready websites and web applications for Philippine businesses — designed to turn visitors into customers." },
+        { key: "intro", label: "Intro paragraphs (HTML)", type: :textarea,
+          default: "<p>Your website is often the first impression a customer has of your business. We build websites and web applications that load fast, look great on every phone, and are structured to rank on Google — so the right people find you and take action.</p><p>Whether you're a startup in Naga, an established business in Legazpi, or serving customers across the Philippines, we design and develop the web presence your business deserves.</p>" },
+        { key: "what_heading", label: "\"What we build\" heading", type: :text, default: "What we build" },
+        { key: "process_heading", label: "Process heading", type: :text, default: "How we work" },
+        { key: "tech_heading", label: "Tech heading", type: :text, default: "Technology we use" },
+        { key: "tech_body", label: "Tech intro", type: :textarea,
+          default: "We build on proven, modern tools chosen for speed, security and long-term maintainability." },
+        { key: "cta_title", label: "CTA title", type: :text, default: "Ready to build your website?" }
+      ],
+      sections: [
+        { key: "what_we_build", label: "What we build", fields: [TITLE, BODY],
+          default: [
+            { title: "Business &amp; brochure sites", body: "Professional multi-page websites that build trust and generate inquiries." },
+            { title: "E-commerce stores", body: "Online shops with secure payments, inventory and nationwide shipping." },
+            { title: "Web applications", body: "Custom dashboards, booking systems and internal tools built around your workflow." },
+            { title: "Landing pages", body: "High-converting pages for campaigns and ads." },
+            { title: "Website redesigns", body: "Modernize a slow or dated site into a fast, mobile-first experience." },
+            { title: "SEO &amp; performance", body: "Technical SEO, Core Web Vitals and speed tuning so you rank and convert." }
+          ] },
+        { key: "process", label: "Process steps", fields: [number_field, TITLE, BODY],
+          default: [
+            { title: "Discover", body: "We learn your goals, audience and requirements, then give you a clear, fixed-scope quote.", meta: { "number" => "01" } },
+            { title: "Design", body: "We design a clean, on-brand, mobile-first experience for your approval.", meta: { "number" => "02" } },
+            { title: "Build", body: "We develop with modern, maintainable code — and keep you updated throughout.", meta: { "number" => "03" } },
+            { title: "Launch &amp; grow", body: "We launch, set up analytics and SEO, and support you after go-live.", meta: { "number" => "04" } }
+          ] },
+        { key: "tech_tags", label: "Technology tags", fields: [TAG],
+          default: [
+            { title: "Ruby on Rails" }, { title: "Hotwire" }, { title: "JavaScript" }, { title: "Tailwind CSS" },
+            { title: "PostgreSQL" }, { title: "React" }, { title: "Stripe" }, { title: "AWS / Cloud" }
+          ] }
+      ]
+    },
+
+    "mobile_development" => {
+      label: "Mobile App Development",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "iOS and Android mobile app development in the Philippines. Native and cross-platform apps built by AktiveSolutions in Bicol, serving clients nationwide. Get a free quote." },
+        { key: "header_eyebrow", label: "Header eyebrow", type: :text, default: "Services" },
+        { key: "header_title", label: "Header title", type: :text, default: "Mobile App Development" },
+        { key: "header_subtitle", label: "Header subtitle", type: :textarea,
+          default: "Native and cross-platform iOS &amp; Android apps — from idea to the App Store and Google Play." },
+        { key: "intro", label: "Intro paragraphs (HTML)", type: :textarea,
+          default: "<p>Your customers live on their phones. A well-built mobile app puts your business in their pocket — with fast performance, offline access, and push notifications that bring them back.</p><p>We take your idea from concept to launch, building reliable apps that people actually enjoy using, backed by a solid, scalable server.</p>" },
+        { key: "what_heading", label: "\"What we build\" heading", type: :text, default: "What we build" },
+        { key: "process_heading", label: "Process heading", type: :text, default: "How we work" },
+        { key: "tech_heading", label: "Tech heading", type: :text, default: "Technology we use" },
+        { key: "tech_body", label: "Tech intro", type: :textarea,
+          default: "We choose the right tools for your app's needs and budget." },
+        { key: "cta_title", label: "CTA title", type: :text, default: "Have an app idea? Let's build it." }
+      ],
+      sections: [
+        { key: "what_we_build", label: "What we build", fields: [TITLE, BODY],
+          default: [
+            { title: "Cross-platform apps", body: "One codebase for both iOS and Android — faster to build and easier to maintain." },
+            { title: "Native apps", body: "Platform-specific apps when you need maximum performance and device features." },
+            { title: "Booking &amp; ordering apps", body: "Let customers book, order and pay from their phone, 24/7." },
+            { title: "Business &amp; internal apps", body: "Tools for your team — inventory, field work, reporting and more." },
+            { title: "App backends &amp; APIs", body: "Secure, scalable servers and APIs that power your app." },
+            { title: "App Store launch", body: "We handle builds, store listings and the submission process." }
+          ] },
+        { key: "process", label: "Process steps", fields: [number_field, TITLE, BODY],
+          default: [
+            { title: "Discover", body: "We define your app's core features and give you a clear, fixed-scope quote.", meta: { "number" => "01" } },
+            { title: "Design", body: "We design intuitive screens and flows your users will love.", meta: { "number" => "02" } },
+            { title: "Build &amp; test", body: "We develop and rigorously test on real devices.", meta: { "number" => "03" } },
+            { title: "Launch &amp; support", body: "We publish to the App Store and Google Play, then support your app.", meta: { "number" => "04" } }
+          ] },
+        { key: "tech_tags", label: "Technology tags", fields: [TAG],
+          default: [
+            { title: "React Native" }, { title: "Swift (iOS)" }, { title: "Kotlin (Android)" }, { title: "Ruby on Rails API" },
+            { title: "PostgreSQL" }, { title: "Firebase" }, { title: "Push notifications" }
           ] }
       ]
     }

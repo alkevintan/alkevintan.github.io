@@ -1,35 +1,22 @@
-<% set_meta title: "Web Development Philippines",
-     description: "Custom web development in the Philippines — fast, SEO-ready websites and web apps. Serving Bicol (Naga, Legazpi) and businesses nationwide. Get a free quote." %>
+<% set_meta title: "Web Development Philippines", description: content_text("web_development", "meta_description") %>
 
-<%= render "shared/page_header", eyebrow: "Services",
-      title: "Web Development",
-      subtitle: "Fast, secure, SEO-ready websites and web applications for Philippine businesses — designed to turn visitors into customers." %>
+<%= render "shared/page_header", eyebrow: content_block("web_development", "header_eyebrow"),
+      title: content_block("web_development", "header_title"),
+      subtitle: content_block("web_development", "header_subtitle") %>
 
 <section class="site-container py-16">
   <div class="prose-content max-w-3xl">
-    <p>Your website is often the first impression a customer has of your business. We build
-       websites and web applications that load fast, look great on every phone, and are
-       structured to rank on Google — so the right people find you and take action.</p>
-    <p>Whether you're a startup in Naga, an established business in Legazpi, or serving
-       customers across the Philippines, we design and develop the web presence your
-       business deserves.</p>
+    <%= content_block("web_development", "intro") %>
   </div>
 
   <%# What we build %>
   <div class="mt-14">
-    <h2 class="text-2xl">What we build</h2>
+    <h2 class="text-2xl"><%= content_block("web_development", "what_heading") %></h2>
     <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <% [
-        ["Business & brochure sites", "Professional multi-page websites that build trust and generate inquiries."],
-        ["E-commerce stores", "Online shops with secure payments, inventory and nationwide shipping."],
-        ["Web applications", "Custom dashboards, booking systems and internal tools built around your workflow."],
-        ["Landing pages", "High-converting pages for campaigns and ads."],
-        ["Website redesigns", "Modernize a slow or dated site into a fast, mobile-first experience."],
-        ["SEO & performance", "Technical SEO, Core Web Vitals and speed tuning so you rank and convert."]
-      ].each do |title, body| %>
+      <% content_items("web_development", "what_we_build").each do |item| %>
         <div class="card">
-          <h3 class="font-semibold text-slate-900"><%= title %></h3>
-          <p class="mt-2 text-sm text-slate-600"><%= body %></p>
+          <h3 class="font-semibold text-slate-900"><%= raw item.title %></h3>
+          <p class="mt-2 text-sm text-slate-600"><%= raw item.body %></p>
         </div>
       <% end %>
     </div>
@@ -39,18 +26,13 @@
 <%# Process %>
 <section class="bg-slate-50 py-16">
   <div class="site-container">
-    <h2 class="text-2xl">How we work</h2>
+    <h2 class="text-2xl"><%= content_block("web_development", "process_heading") %></h2>
     <ol class="mt-8 grid gap-8 md:grid-cols-4">
-      <% [
-        ["01", "Discover", "We learn your goals, audience and requirements, then give you a clear, fixed-scope quote."],
-        ["02", "Design", "We design a clean, on-brand, mobile-first experience for your approval."],
-        ["03", "Build", "We develop with modern, maintainable code — and keep you updated throughout."],
-        ["04", "Launch & grow", "We launch, set up analytics and SEO, and support you after go-live."]
-      ].each do |num, title, body| %>
+      <% content_items("web_development", "process").each_with_index do |step, i| %>
         <li>
-          <span class="font-display text-2xl font-bold text-brand-500"><%= num %></span>
-          <h3 class="mt-2 font-semibold text-slate-900"><%= title %></h3>
-          <p class="mt-1 text-sm text-slate-600"><%= body %></p>
+          <span class="font-display text-2xl font-bold text-brand-500"><%= raw step.meta["number"].presence || format("%02d", i + 1) %></span>
+          <h3 class="mt-2 font-semibold text-slate-900"><%= raw step.title %></h3>
+          <p class="mt-1 text-sm text-slate-600"><%= raw step.body %></p>
         </li>
       <% end %>
     </ol>
@@ -60,11 +42,11 @@
 <%# Tech %>
 <section class="site-container py-16">
   <div class="max-w-3xl">
-    <h2 class="text-2xl">Technology we use</h2>
-    <p class="mt-3 text-slate-600">We build on proven, modern tools chosen for speed, security and long-term maintainability.</p>
+    <h2 class="text-2xl"><%= content_block("web_development", "tech_heading") %></h2>
+    <p class="mt-3 text-slate-600"><%= content_block("web_development", "tech_body") %></p>
     <div class="mt-6 flex flex-wrap gap-2">
-      <% ["Ruby on Rails", "Hotwire", "JavaScript", "Tailwind CSS", "PostgreSQL", "React", "Stripe", "AWS / Cloud"].each do |t| %>
-        <span class="rounded-full bg-slate-100 px-4 py-1.5 text-sm font-medium text-slate-700"><%= t %></span>
+      <% content_items("web_development", "tech_tags").each do |tag| %>
+        <span class="rounded-full bg-slate-100 px-4 py-1.5 text-sm font-medium text-slate-700"><%= raw tag.title %></span>
       <% end %>
     </div>
   </div>
@@ -72,4 +54,4 @@
 
 <%= render "shared/faq", faqs: faqs_for("web_development") %>
 
-<%= render "shared/cta", title: "Ready to build your website?" %>
+<%= render "shared/cta", title: content_block("web_development", "cta_title") %>
