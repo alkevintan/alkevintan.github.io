@@ -229,6 +229,43 @@ module PageContent
             { title: "PostgreSQL" }, { title: "Firebase" }, { title: "Push notifications" }
           ] }
       ]
+    },
+
+    "privacy" => {
+      label: "Privacy Policy",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "How AktiveSolutions collects and uses your information." },
+        { key: "header_title", label: "Page title", type: :text, default: "Privacy Policy" },
+        { key: "body", label: "Policy text (HTML)", type: :textarea,
+          default: "<p>This is a placeholder privacy policy for AktiveSolutions. Replace with your finalized policy before launch. We collect the information you submit through our contact form (such as your name, email and message) solely to respond to your inquiry.</p><h2>Contact</h2><p>Questions about this policy? Email <a href=\"mailto:hello@aktivesolutions.com\">hello@aktivesolutions.com</a>.</p>" }
+      ],
+      sections: []
+    },
+
+    "terms" => {
+      label: "Terms of Service",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "The terms governing use of the AktiveSolutions website." },
+        { key: "header_title", label: "Page title", type: :text, default: "Terms of Service" },
+        { key: "body", label: "Terms text (HTML)", type: :textarea,
+          default: "<p>This is a placeholder terms-of-service page for AktiveSolutions. Replace with your finalized terms before launch.</p>" }
+      ],
+      sections: []
+    },
+
+    "thank_you" => {
+      label: "Thank-you page",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "Thanks for reaching out to AktiveSolutions." },
+        { key: "heading", label: "Heading", type: :text, default: "Thank you!" },
+        { key: "body", label: "Message", type: :textarea,
+          default: "We've received your message and will get back to you within one business day." },
+        { key: "cta", label: "Button label", type: :text, default: "Back to home" }
+      ],
+      sections: []
     }
   }.freeze
 

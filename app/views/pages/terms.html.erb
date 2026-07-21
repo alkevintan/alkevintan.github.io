@@ -1,10 +1,8 @@
-<% set_meta title: "Terms of Service",
-     description: "The terms governing use of the AktiveSolutions website." %>
+<% set_meta title: "Terms of Service", description: content_text("terms", "meta_description") %>
 
-<%= render "shared/page_header", title: "Terms of Service" %>
+<%= render "shared/page_header", title: content_block("terms", "header_title") %>
 
 <section class="site-container py-16 prose-content">
   <p><em>Last updated: <%= Time.current.strftime("%B %Y") %>.</em></p>
-  <p>This is a placeholder terms-of-service page for <%= SITE[:name] %>. Replace with
-     your finalized terms before launch.</p>
+  <%= content_block("terms", "body") %>
 </section>
