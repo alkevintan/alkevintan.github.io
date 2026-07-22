@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+# SEO content CLI — see `bin/seo help`.
+#
+# Targets the LIVE production site by default, running lib/seo/cli.rb inside the
+# deployed container via `kamal app exec` (production Postgres is an internal
+# Kamal accessory, not reachable from here directly). Pass --local (or --dev, or
+# SEO_TARGET=local) to run against the local dev database instead.
+#
+# NOTE: the production path requires the current image to contain this tool, so
+# run `bin/deploy` once after adding/updating bin/seo or lib/seo/cli.rb.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+# This box's Arch/omarchy ruby installs gems --user, so make the user gem bins
+# (rails, kamal) reachable. Only affects THIS machine, never the container.
+export GEM_HOME="${GEM_HOME:-$HOME/.local/share/gem/ruby/3.4.0}"
+export GEM_PATH="${GEM_PATH:-$GEM_HOME:/usr/lib/ruby/gems/3.4.0}"
+export PATH="$GEM_HOME/bin:$PATH"
+
+TARGET="${SEO_TARGET:-production}"
+raw=()
+for a in "$@"; do
+  case "$a" in
+    --local|--dev)       TARGET=local ;;
+    --prod|--production) TARGET=production ;;
+    *)                   raw+=("$a") ;;
+  esac
+done
+[ "${#raw[@]}" -eq 0 ] && raw=(help)
+
+if [ "$TARGET" = local ]; then
+  echo ">> seo target: local/dev database" >&2
+  exec bin/rails runner lib/seo/cli.rb "${raw[@]}"
+fi
+
+# --- production: run inside the live container via Kamal ---------------------
+echo ">> seo target: PRODUCTION (live site on westeros)" >&2
+
+# Pack argv into base64 JSON so arbitrary text/HTML (and --body-file contents,
+# read locally and inlined) survive the local-shell -> ssh -> docker-exec ->
+# container-shell hops without any quoting hazards.
+BLOB="$(ruby -rjson -rbase64 -e '
+  argv = ARGV.map do |a|
+    if a.start_with?("--body-file=")
+      path = a.split("=", 2)[1].to_s
+      abort "body-file not found: #{path}" unless File.exist?(path)
+      "--body=" + File.read(path)
+    else
+      a
+    end
+  end
+  print Base64.strict_encode64(JSON.generate(argv))
+' "${raw[@]}")"
+
+# Capture everything (Kamal logs its connection chatter around the command
+# output), then print only what the CLI wrote between its markers.
+OUT="$(bin/kamal app exec --reuse "bin/rails runner lib/seo/cli.rb --argv64 ${BLOB}" 2>&1 || true)"
+CONTENT="$(printf '%s\n' "$OUT" | awk '
+  /===SEO:END===/   { exit }
+  seen              { print }
+  /===SEO:BEGIN===/ { seen = 1 }
+')"
+
+if printf '%s\n' "$OUT" | grep -q '===SEO:BEGIN==='; then
+  printf '%s\n' "$CONTENT"
+  # Surface the CLI's own ERROR line (printed between the markers) as a failure.
+  printf '%s\n' "$CONTENT" | grep -q '^ERROR:' && exit 1
+  exit 0
+else
+  # The command never ran (SSH/Kamal/boot failure) — show the raw output so the
+  # problem is visible instead of swallowed.
+  echo "!! seo: command did not run against production. Raw Kamal output:" >&2
+  printf '%s\n' "$OUT" >&2
+  exit 1
+fi
