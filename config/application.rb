@@ -14,7 +14,10 @@ module AktiveSolutions
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w[assets tasks])
+    # `seo` holds the bin/seo CLI script (lib/seo/cli.rb) — it runs code at load
+    # time and defines a non-Zeitwerk constant (Seo::CLI), so it must never be
+    # autoloaded or eager loaded; it's only ever loaded via `rails runner`.
+    config.autoload_lib(ignore: %w[assets tasks seo])
 
     # Configuration for the application, engines, and railties goes here.
     #
