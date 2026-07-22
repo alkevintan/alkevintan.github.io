@@ -13,6 +13,10 @@ class PagesController < PublicController
   def services; end
   def web_development; end
   def mobile_development; end
+  def seo; end
+  def ecommerce; end
+  def ui_ux_design; end
+  def maintenance; end
   def privacy; end
   def terms; end
   def thank_you; end

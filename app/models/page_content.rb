@@ -64,7 +64,7 @@ module PageContent
           default: [
             { title: "Web Development", body: "Marketing sites, dashboards and web apps built with modern, maintainable code.", meta: { "path" => "/services/web-development" } },
             { title: "Mobile Apps", body: "Native and cross-platform iOS &amp; Android apps your customers will love.", meta: { "path" => "/services/mobile-app-development" } },
-            { title: "SEO &amp; Growth", body: "Technical SEO and content that helps Philippine businesses get found on Google.", meta: { "path" => "/services" } }
+            { title: "SEO &amp; Growth", body: "Technical SEO and content that helps Philippine businesses get found on Google.", meta: { "path" => "/services/seo" } }
           ] },
         { key: "whyus_points", label: "Why-us points", fields: [TITLE, BODY],
           default: [
@@ -122,12 +122,12 @@ module PageContent
         { key: "extras_heading", label: "Extras heading", type: :text, default: "We also help with" }
       ],
       sections: [
-        { key: "extras", label: "Also help with", fields: [TITLE, BODY],
+        { key: "extras", label: "Also help with", fields: [TITLE, BODY, link_field],
           default: [
-            { title: "SEO &amp; Growth", body: "Rank on Google and turn traffic into leads." },
-            { title: "E-commerce", body: "Sell online with secure payments and shipping." },
-            { title: "UI/UX Design", body: "Clean, modern, mobile-first interfaces." },
-            { title: "Maintenance &amp; Support", body: "Keep your site or app fast, secure and up to date." }
+            { title: "SEO &amp; Growth", body: "Rank on Google and turn traffic into leads.", meta: { "path" => "/services/seo" } },
+            { title: "E-commerce", body: "Sell online with secure payments and shipping.", meta: { "path" => "/services/e-commerce" } },
+            { title: "UI/UX Design", body: "Clean, modern, mobile-first interfaces.", meta: { "path" => "/services/ui-ux-design" } },
+            { title: "Maintenance &amp; Support", body: "Keep your site or app fast, secure and up to date.", meta: { "path" => "/services/maintenance" } }
           ] }
       ]
     },
@@ -227,6 +227,114 @@ module PageContent
           default: [
             { title: "React Native" }, { title: "Swift (iOS)" }, { title: "Kotlin (Android)" }, { title: "Ruby on Rails API" },
             { title: "PostgreSQL" }, { title: "Firebase" }, { title: "Push notifications" }
+          ] }
+      ]
+    },
+
+    "seo" => {
+      label: "SEO Services",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "SEO services in the Philippines that get your business found on Google. Technical SEO, local SEO and content for Bicol and nationwide. Get a free audit." },
+        { key: "header_eyebrow", label: "Header eyebrow", type: :text, default: "Services" },
+        { key: "header_title", label: "Header title", type: :text, default: "SEO Services" },
+        { key: "header_subtitle", label: "Header subtitle", type: :textarea,
+          default: "Get found on Google and turn search traffic into customers — technical, local and content SEO built for Philippine businesses." },
+        { key: "intro", label: "Intro paragraphs (HTML)", type: :textarea,
+          default: "<p>A beautiful website is only valuable if people can find it. Our SEO services help Philippine businesses rank on Google for the searches that matter — so the right customers discover you at the moment they're ready to act.</p><p>We combine technical SEO, local SEO and content strategy, whether you're competing in Bicol (Naga, Legazpi) or across the country.</p>" },
+        { key: "what_heading", label: "\"What we do\" heading", type: :text, default: "What we do" },
+        { key: "cta_title", label: "CTA title", type: :text, default: "Ready to rank higher on Google?" }
+      ],
+      sections: [
+        { key: "what_we_do", label: "What we do", fields: [TITLE, BODY],
+          default: [
+            { title: "Technical SEO", body: "Site speed, crawlability, structured data and Core Web Vitals so search engines can properly index and rank your site." },
+            { title: "Local SEO", body: "Google Business Profile, local citations and consistent NAP to win customers in your city and region." },
+            { title: "Keyword strategy", body: "Research into what your customers actually search for, mapped to the right pages on your site." },
+            { title: "Content &amp; blogging", body: "SEO-focused articles that target long-tail searches and build your authority." },
+            { title: "On-page optimization", body: "Titles, meta descriptions, headings and internal linking tuned for search engines and readers alike." },
+            { title: "Reporting &amp; growth", body: "Clear reporting on rankings, traffic and conversions, so you can see the results." }
+          ] }
+      ]
+    },
+
+    "ecommerce" => {
+      label: "E-commerce",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "E-commerce website development in the Philippines. Online stores with GCash, Maya and card payments, built to sell. Serving Bicol and nationwide." },
+        { key: "header_eyebrow", label: "Header eyebrow", type: :text, default: "Services" },
+        { key: "header_title", label: "Header title", type: :text, default: "E-commerce Development" },
+        { key: "header_subtitle", label: "Header subtitle", type: :textarea,
+          default: "Sell online with a fast, secure store built for Filipino shoppers — payments, inventory and shipping, all in one place." },
+        { key: "intro", label: "Intro paragraphs (HTML)", type: :textarea,
+          default: "<p>Ready to sell online? We build e-commerce websites that make it easy for customers to browse, trust and buy — with the payment and shipping options Filipino shoppers expect.</p><p>From a focused first store to a full custom platform, we design online shops that are fast, secure and built to grow with your business.</p>" },
+        { key: "what_heading", label: "\"What we build\" heading", type: :text, default: "What we build" },
+        { key: "cta_title", label: "CTA title", type: :text, default: "Ready to start selling online?" }
+      ],
+      sections: [
+        { key: "what_we_do", label: "What we build", fields: [TITLE, BODY],
+          default: [
+            { title: "Online stores", body: "Mobile-friendly shops with product catalogs, search and a smooth, trustworthy checkout." },
+            { title: "Local payments", body: "GCash, Maya, card and bank-transfer integrations that reduce friction at checkout." },
+            { title: "Shipping &amp; delivery", body: "Courier rate integrations, delivery options and order tracking for your customers." },
+            { title: "Inventory &amp; orders", body: "Manage stock, orders and customers from an admin built around how you work." },
+            { title: "Custom platforms", body: "Marketplaces, subscriptions and complex catalogs scoped around your business." },
+            { title: "Growth-ready", body: "Built with SEO and performance in mind so you earn organic traffic, not just ad clicks." }
+          ] }
+      ]
+    },
+
+    "ui_ux_design" => {
+      label: "UI/UX Design",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "UI/UX design services in the Philippines. Clean, modern, mobile-first interfaces that are easy to use and built to convert. From Bicol, nationwide." },
+        { key: "header_eyebrow", label: "Header eyebrow", type: :text, default: "Services" },
+        { key: "header_title", label: "Header title", type: :text, default: "UI/UX Design" },
+        { key: "header_subtitle", label: "Header subtitle", type: :textarea,
+          default: "Clean, modern, mobile-first design that's a pleasure to use — and built to turn visitors into customers." },
+        { key: "intro", label: "Intro paragraphs (HTML)", type: :textarea,
+          default: "<p>Great design is more than good looks — it's about making your website or app effortless to use. We design clean, modern, mobile-first interfaces that guide your customers naturally toward taking action.</p><p>Every decision is grounded in clarity, accessibility and conversion, so your product works beautifully for real people.</p>" },
+        { key: "what_heading", label: "\"What we do\" heading", type: :text, default: "What we do" },
+        { key: "cta_title", label: "CTA title", type: :text, default: "Ready to design a better experience?" }
+      ],
+      sections: [
+        { key: "what_we_do", label: "What we do", fields: [TITLE, BODY],
+          default: [
+            { title: "UI design", body: "Clean, on-brand visual design for websites and apps that looks great on every screen." },
+            { title: "UX design", body: "Intuitive flows and layouts that make it easy for customers to find what they need and act." },
+            { title: "Mobile-first design", body: "Interfaces designed for phones first, where most of your customers actually are." },
+            { title: "Wireframing &amp; prototyping", body: "Map and test the experience before development to avoid costly rework." },
+            { title: "Design systems", body: "Consistent components and styles so your product stays coherent as it grows." },
+            { title: "Accessibility", body: "Designs that work for everyone, with proper contrast, structure and readability." }
+          ] }
+      ]
+    },
+
+    "maintenance" => {
+      label: "Website Maintenance",
+      blocks: [
+        { key: "meta_description", label: "SEO meta description", type: :textarea,
+          default: "Website maintenance and support in the Philippines. Security updates, backups, performance and content changes to keep your site fast, safe and current." },
+        { key: "header_eyebrow", label: "Header eyebrow", type: :text, default: "Services" },
+        { key: "header_title", label: "Header title", type: :text, default: "Website Maintenance &amp; Support" },
+        { key: "header_subtitle", label: "Header subtitle", type: :textarea,
+          default: "Keep your website or app fast, secure and up to date — with predictable, worry-free support after launch." },
+        { key: "intro", label: "Intro paragraphs (HTML)", type: :textarea,
+          default: "<p>Your website is an investment worth protecting. Our maintenance and support keeps your site secure, fast and current — so you can focus on running your business instead of worrying about updates.</p><p>With a predictable monthly plan, there are no surprise bills and no scrambling when something needs attention.</p>" },
+        { key: "what_heading", label: "\"What's included\" heading", type: :text, default: "What's included" },
+        { key: "cta_title", label: "CTA title", type: :text, default: "Want your website looked after?" }
+      ],
+      sections: [
+        { key: "what_we_do", label: "What's included", fields: [TITLE, BODY],
+          default: [
+            { title: "Security updates", body: "Regular patching of software, frameworks and plugins to keep your site protected." },
+            { title: "Backups", body: "Automatic, tested backups so you can recover quickly if anything goes wrong." },
+            { title: "Performance monitoring", body: "Keeping pages fast and catching downtime before it costs you customers." },
+            { title: "Content updates", body: "Small edits to text, images, prices and new pages as your business changes." },
+            { title: "Bug fixes", body: "Prompt fixes for broken forms, links or display issues as they come up." },
+            { title: "SEO upkeep", body: "Keeping your site fast, secure and error-free to protect your search rankings." }
           ] }
       ]
     },

@@ -1,0 +1,33 @@
+<%# Shared template for secondary service pages (SEO, e-commerce, UI/UX,
+    maintenance). Locals: page (registry key), meta_title. Copy is editable via
+    the PageContent registry, exactly like web_development / mobile_development. %>
+<% set_meta title: meta_title, description: content_text(page, "meta_description") %>
+
+<%= render "shared/page_header", eyebrow: content_block(page, "header_eyebrow"),
+      title: content_block(page, "header_title"),
+      subtitle: content_block(page, "header_subtitle") %>
+
+<section class="site-container py-16">
+  <div class="prose-content max-w-3xl">
+    <%= content_block(page, "intro") %>
+  </div>
+
+  <div class="mt-14">
+    <h2 class="text-2xl"><%= content_block(page, "what_heading") %></h2>
+    <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <% content_items(page, "what_we_do").each do |item| %>
+        <div class="card">
+          <h3 class="font-semibold text-slate-900"><%= raw item.title %></h3>
+          <p class="mt-2 text-sm text-slate-600"><%= raw item.body %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<% service_faqs = faqs_for(page) %>
+<% if service_faqs.any? %>
+  <%= render "shared/faq", faqs: service_faqs %>
+<% end %>
+
+<%= render "shared/cta", title: content_block(page, "cta_title") %>

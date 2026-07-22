@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   get "services",  to: "pages#services"
   get "services/web-development",        to: "pages#web_development",    as: :web_development
   get "services/mobile-app-development", to: "pages#mobile_development", as: :mobile_development
+  get "services/seo",           to: "pages#seo",          as: :seo_services
+  get "services/e-commerce",    to: "pages#ecommerce",    as: :ecommerce
+  get "services/ui-ux-design",  to: "pages#ui_ux_design", as: :ui_ux_design
+  get "services/maintenance",   to: "pages#maintenance",  as: :maintenance
   get "privacy",   to: "pages#privacy"
   get "terms",     to: "pages#terms"
   get "thank-you", to: "pages#thank_you", as: :thank_you

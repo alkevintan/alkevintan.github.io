@@ -7,7 +7,11 @@ class Faq < ApplicationRecord
   PAGE_LABELS = {
     "services"           => "Services",
     "web_development"    => "Web Development",
-    "mobile_development" => "Mobile App Development"
+    "mobile_development" => "Mobile App Development",
+    "seo"                => "SEO Services",
+    "ecommerce"          => "E-commerce",
+    "ui_ux_design"       => "UI/UX Design",
+    "maintenance"        => "Website Maintenance"
   }.freeze
 
   validates :page,     presence: true

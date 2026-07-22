@@ -3,6 +3,23 @@
      type: "article",
      image: (@case_study.cover_image.attached? ? rails_blob_path(@case_study.cover_image, only_path: true) : nil) %>
 
+<% content_for :json_ld do %>
+  <%
+    case_study_schema = {
+      "@context" => "https://schema.org", "@type" => "Article",
+      "headline" => @case_study.title,
+      "description" => (@case_study.meta_description.presence || @case_study.summary),
+      "datePublished" => @case_study.created_at.iso8601,
+      "dateModified" => @case_study.updated_at.iso8601,
+      "author" => { "@type" => "Organization", "name" => SITE[:name] },
+      "publisher" => { "@type" => "Organization", "name" => SITE[:name] },
+      "mainEntityOfPage" => absolute_url(portfolio_item_path(@case_study))
+    }
+    case_study_schema["image"] = meta_image if @case_study.cover_image.attached?
+  %>
+  <script type="application/ld+json"><%= raw case_study_schema.to_json %></script>
+<% end %>
+
 <%= render "shared/page_header", eyebrow: [@case_study.client, @case_study.industry].compact_blank.join(" · "),
       title: @case_study.title,
       subtitle: @case_study.summary %>
