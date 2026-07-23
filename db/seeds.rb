@@ -128,13 +128,24 @@ puts "Testimonials: #{Testimonial.count}"
 # ---------------------------------------------------------------------------
 case_studies = [
   {
+    title: "Florist brand, shop and lead-gen site for K and Co",
+    slug: "k-and-co-flowers-and-events",
+    client: "K and Co Flowers and Events", industry: "Florist / Events Styling",
+    tech_stack: "Astro, React, Node.js, SQLite, Kamal",
+    results: "A launch-ready brand site with an online flower shop, portfolio and live Facebook feed the studio manages itself.",
+    summary: "A brand and lead-generation site for a Naga City events-styling studio, with an online flower shop and a live social feed.",
+    url: "https://kandco.aktivesolutions.com",
+    featured: true, published: true, position: 1,
+    body: "<h2>The challenge</h2><p>K and Co is an events styling and floral design studio in Naga City with a strong social following but no home of their own online. They needed a polished site to showcase their work, capture enquiries, and sell arrangements without juggling scattered Messenger and Viber threads.</p><h2>What we built</h2><p>We designed and built a fast, mobile-first site on Astro with a portfolio, services and about pages, a contact form that captures leads, and an on-site flower shop where customers browse arrangements and place orders. A \"Latest from K &amp; Co\" feed pulls their recent posts straight from Facebook, and a simple admin dashboard lets the studio manage products, orders and enquiries themselves.</p><h2>The result</h2><p>The studio now has a refined, self-managed presence that markets their styling work and takes orders in one place — turning social interest into real enquiries.</p>"
+  },
+  {
     title: "E-commerce store for a Naga City boutique",
     slug: "naga-city-boutique-ecommerce",
     client: "Santos Boutique", industry: "Retail / Fashion",
     tech_stack: "Ruby on Rails, Hotwire, Stripe, PostgreSQL",
     results: "3x more orders in the first quarter; now shipping nationwide.",
     summary: "A fast, mobile-first online store that let a local boutique sell beyond their physical shop.",
-    featured: true, published: true, position: 1,
+    featured: true, published: true, position: 2,
     body: "<h2>The challenge</h2><p>Santos Boutique had a loyal walk-in following in Naga City but no way to sell online. They needed a store that was easy to manage and quick on mobile, where most of their customers browse.</p><h2>What we built</h2><p>We designed and developed a custom e-commerce store with product management, secure card payments, and nationwide shipping options. The site is optimized for speed and SEO so it ranks for local searches.</p><h2>The result</h2><p>Within the first quarter, online orders tripled and the boutique began shipping to customers across the Philippines.</p>"
   },
   {
@@ -144,7 +155,7 @@ case_studies = [
     tech_stack: "React Native, Rails API, PostgreSQL",
     results: "Bookings handled 24/7 without manual back-and-forth.",
     summary: "A cross-platform mobile app that lets travelers book Mayon-area tours in a few taps.",
-    featured: true, published: true, position: 2,
+    featured: true, published: true, position: 3,
     body: "<h2>The challenge</h2><p>TourLegazpi was managing bookings over Facebook Messenger and spreadsheets, which didn't scale during peak season.</p><h2>What we built</h2><p>We built a cross-platform iOS and Android app with real-time availability, online booking, and automated confirmations, backed by a Rails API.</p><h2>The result</h2><p>Travelers can now book tours any time of day, and the team spends far less time on manual coordination.</p>"
   }
 ]
