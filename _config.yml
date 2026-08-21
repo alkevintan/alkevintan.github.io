@@ -1,0 +1,27 @@
+# Site settings
+title: Weathering Brainstorms
+email: alkevintan@gmail.com
+description: >-
+  A collection of thoughts
+baseurl: ""
+url: ""
+twitter_username: cpnbrainstorm
+github_username: alkevintan
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+
+# Exclude from processing.
+exclude:
+  - .jekyll-cache/
+  - .sass-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
